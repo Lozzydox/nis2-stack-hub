@@ -1,0 +1,523 @@
+---
+export interface ToolItem {
+  name: string;
+  slug: string;
+  category: string;
+  vendorCountry: string;
+  isEuropeanSovereign: boolean;
+  startingPriceMonthlyEur: number;
+  pricingModel: 'PER_USER' | 'PER_ENDPOINT' | 'FLAT_RATE' | 'CUSTOM_QUOTE';
+  minimumSeats: number;
+  nis2ArticlesCovered: string[];
+  certifications: string[];
+  pros: string[];
+  cons: string[];
+  officialUrl: string;
+  affiliateUrl: string;
+  hasActiveAffiliateLink?: boolean;
+  pricingScreenshotPath: string;
+  lastVerifiedDate: string;
+}
+
+interface Props {
+  tools: ToolItem[];
+}
+
+const { tools } = Astro.props;
+const defaultSeats = 50;
+
+const pricingModelLabels: Record<ToolItem['pricingModel'], string> = {
+  PER_ENDPOINT: 'Par poste / endpoint',
+  PER_USER: 'Par utilisateur actif',
+  FLAT_RATE: 'Forfait global fixe',
+  CUSTOM_QUOTE: 'Sur devis entreprise'
+};
+
+function computeToolAnnual(tool: ToolItem, seats: number): number {
+  const effectiveSeats = Math.max(seats, tool.minimumSeats);
+  if (tool.pricingModel === 'CUSTOM_QUOTE' || tool.startingPriceMonthlyEur === 0) {
+    const benchmarkMonthly = tool.category === 'GRC_NIS2' ? 490 : effectiveSeats * 14.5;
+    return benchmarkMonthly * 12;
+  }
+  const monthly =
+    tool.pricingModel === 'FLAT_RATE'
+      ? tool.startingPriceMonthlyEur
+      : effectiveSeats * tool.startingPriceMonthlyEur;
+  return monthly * 12;
+}
+
+const initialAnnuals = tools.map((t) => computeToolAnnual(t, defaultSeats));
+const maxInitialAnnual = Math.max(...initialAnnuals, 1);
+const minInitialAnnual = Math.min(...initialAnnuals);
+const initialSavings = Math.max(0, Math.round(maxInitialAnnual - minInitialAnnual));
+const numberFormat = new Intl.NumberFormat('fr-FR', {
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0
+});
+---
+
+<section
+  class="bg-white border border-zinc-200 rounded-md overflow-hidden my-8 shadow-[0_1px_3px_rgba(9,9,11,0.03)] animate-fade-up"
+  data-tco-calculator
+>
+  <div class="bg-zinc-100/80 px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-zinc-200">
+    <div>
+      <div class="flex flex-wrap items-center gap-2 mb-1">
+        <span class="px-2 py-0.5 text-[11px] uppercase tracking-wider bg-white text-zinc-800 border border-zinc-200 rounded font-medium">
+          Simulateur TCO & Conformité NIS2
+        </span>
+        <span
+          class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-[11px] font-semibold"
+          data-savings-badge
+        >
+          Écart budgétaire : -{numberFormat.format(initialSavings)} € / an sur {defaultSeats} postes
+        </span>
+      </div>
+      <h2 class="text-base font-display font-bold tracking-tight text-zinc-950">
+        Calculateur de Coût Réel (TCO) et Exposition Juridictionnelle
+      </h2>
+    </div>
+
+    <label class="inline-flex items-center gap-2.5 cursor-pointer bg-white hover:bg-zinc-50 border border-zinc-200 px-3.5 py-2 rounded text-xs font-medium text-zinc-800 transition-colors select-none">
+      <input
+        type="checkbox"
+        class="w-3.5 h-3.5 accent-zinc-900 rounded cursor-pointer"
+        data-sovereign-filter
+      />
+      <span>Filtrer : Souverain UE / Exempt Cloud Act uniquement</span>
+    </label>
+  </div>
+
+  <div class="p-6 bg-zinc-50/60 border-b border-zinc-200">
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+      <div class="flex-1">
+        <div class="flex items-center justify-between mb-2">
+          <label for="tco-seats-slider" class="text-xs font-medium text-zinc-700">
+            Volume du parc informatique à couvrir (Endpoints / Utilisateurs)
+          </label>
+          <div class="flex items-baseline gap-1.5 bg-white border border-zinc-200 px-3 py-1 rounded">
+            <span class="text-lg font-bold font-mono text-zinc-950" data-seats-display>{defaultSeats}</span>
+            <span class="text-xs text-zinc-500">postes</span>
+          </div>
+        </div>
+
+        <input
+          id="tco-seats-slider"
+          type="range"
+          min="10"
+          max="500"
+          step="5"
+          value={defaultSeats}
+          data-seats-slider
+          class="w-full h-2 bg-zinc-200 rounded appearance-none cursor-pointer accent-zinc-900"
+        />
+
+        <div class="flex justify-between text-[11px] text-zinc-500 mt-1.5">
+          <span>10 postes (TPE)</span>
+          <span>50 postes (PME)</span>
+          <span>150 postes (PME+)</span>
+          <span>300 postes (ETI)</span>
+          <span>500 postes (ETI)</span>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-1.5">
+        {[10, 25, 50, 100, 250, 500].map((preset) => (
+          <button
+            type="button"
+            data-seat-preset={preset}
+            class={`px-3 py-1.5 text-xs font-mono font-medium rounded border transition-colors cursor-pointer ${
+              preset === defaultSeats
+                ? 'bg-zinc-900 text-white border-zinc-900'
+                : 'bg-white text-zinc-700 border-zinc-200 hover:bg-zinc-100'
+            }`}
+          >
+            {preset}p
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6" data-tools-grid>
+    {tools.map((tool, index) => {
+      const effectiveSeats = Math.max(defaultSeats, tool.minimumSeats);
+      const isCustom = tool.pricingModel === 'CUSTOM_QUOTE' || tool.startingPriceMonthlyEur === 0;
+      const isFlat = tool.pricingModel === 'FLAT_RATE';
+      const initialMonthly = isCustom
+        ? 0
+        : isFlat
+          ? tool.startingPriceMonthlyEur
+          : effectiveSeats * tool.startingPriceMonthlyEur;
+      const initialAnnual = initialMonthly * 12;
+      const computedAnnualForBar = computeToolAnnual(tool, defaultSeats);
+      const initialBarPct = Math.max(12, Math.round((computedAnnualForBar / maxInitialAnnual) * 100));
+
+      return (
+        <div
+          class="border border-zinc-200 rounded-md bg-white p-5 flex flex-col justify-between hover:border-zinc-300 hover:-translate-y-0.5 hover:shadow-sm transition-all duration-200 relative"
+          data-tool-card
+          data-slug={tool.slug}
+          data-category={tool.category}
+          data-price={tool.startingPriceMonthlyEur}
+          data-model={tool.pricingModel}
+          data-min-seats={tool.minimumSeats}
+          data-sovereign={tool.isEuropeanSovereign ? 'true' : 'false'}
+          data-current-monthly={Math.round(initialMonthly)}
+          data-current-annual={Math.round(initialAnnual)}
+        >
+          {index === 0 && (
+            <div class="mb-3 flex items-center justify-between bg-zinc-100/80 border border-zinc-200 px-3 py-1.5 rounded text-[11px] text-zinc-800 font-medium">
+              <span class="inline-flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-zinc-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                </svg>
+                Option Recommandée Audit NIS2
+              </span>
+              <span class="text-zinc-500">Vérifié le {tool.lastVerifiedDate}</span>
+            </div>
+          )}
+
+          <div>
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded bg-zinc-50 border border-zinc-200 p-1.5 shrink-0 flex items-center justify-center">
+                  <img
+                    src={`/logos/${tool.slug}.svg`}
+                    alt={`Logo ${tool.name}`}
+                    class="w-full h-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <div>
+                  <h3 class="text-base font-display font-bold text-zinc-950 leading-tight">{tool.name}</h3>
+                  <p class="text-xs text-zinc-500 mt-0.5">
+                    Modèle : {pricingModelLabels[tool.pricingModel]} · Min. <span class="font-mono">{tool.minimumSeats}</span> licence(s)
+                  </p>
+                </div>
+              </div>
+
+              {tool.isEuropeanSovereign ? (
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  <svg class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Exempt Cloud Act · Souverain UE ({tool.vendorCountry})
+                </span>
+              ) : (
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200">
+                  <svg class="w-3.5 h-3.5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                  </svg>
+                  Juridiction {tool.vendorCountry} · Soumis Cloud Act US
+                </span>
+              )}
+            </div>
+
+            <div class="bg-zinc-50 border border-zinc-200 rounded p-4 my-4">
+              {isCustom ? (
+                <div>
+                  <p class="text-[11px] uppercase tracking-wider text-zinc-500 font-medium">
+                    Estimation Budgétaire (Licence Entreprise)
+                  </p>
+                  <p class="text-xl font-display font-bold text-zinc-950 mt-1">
+                    Sur Devis Personnalisé
+                  </p>
+                  <p class="text-xs text-zinc-600 mt-1">
+                    Tarification calibrée selon le périmètre d'audit NIS2 et le nombre d'entités.
+                  </p>
+                </div>
+              ) : (
+                <div class="grid grid-cols-2 gap-4 items-baseline">
+                  <div>
+                    <p class="text-[11px] uppercase tracking-wider text-zinc-500 font-medium">
+                      Coût Mensuel HT
+                    </p>
+                    <p class="text-2xl font-bold font-mono text-zinc-950 mt-0.5">
+                      <span data-monthly-cost>
+                        {numberFormat.format(initialMonthly)}
+                      </span>
+                      <span class="text-xs font-sans font-normal text-zinc-500"> € / mois</span>
+                    </p>
+                    <p class="text-[11px] text-zinc-500 mt-0.5">
+                      Unitaire : <span class="font-mono">{tool.startingPriceMonthlyEur.toFixed(2).replace('.', ',')} €</span> / mois
+                    </p>
+                  </div>
+                  <div class="border-l border-zinc-200 pl-4">
+                    <p class="text-[11px] uppercase tracking-wider text-zinc-700 font-medium">
+                      TCO Annuel Estimé HT
+                    </p>
+                    <p class="text-2xl font-bold font-mono text-zinc-950 mt-0.5">
+                      <span data-annual-cost>
+                        {numberFormat.format(initialAnnual)}
+                      </span>
+                      <span class="text-xs font-sans font-normal text-zinc-500"> € / an</span>
+                    </p>
+                    <p class="text-[11px] text-zinc-500 mt-0.5" data-billed-seats>
+                      Facturé sur {effectiveSeats} postes
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              <div class="mt-3 pt-3 border-t border-zinc-200/80">
+                <div class="flex items-center justify-between text-[11px] text-zinc-500 mb-1">
+                  <span>Indice d'empreinte budgétaire comparative</span>
+                  <span class="font-mono text-zinc-700" data-bar-label>{initialBarPct}%</span>
+                </div>
+                <div class="w-full h-1.5 bg-zinc-200 rounded overflow-hidden">
+                  <div
+                    class={`h-full rounded transition-all duration-300 ease-out ${
+                      tool.isEuropeanSovereign ? 'bg-emerald-600' : 'bg-zinc-900'
+                    }`}
+                    style={`width: ${initialBarPct}%;`}
+                    data-cost-bar
+                  ></div>
+                </div>
+              </div>
+
+              <div
+                data-min-warning
+                class={`mt-3 pt-2.5 border-t border-zinc-200 text-xs text-amber-800 flex items-center gap-1.5 ${
+                  defaultSeats < tool.minimumSeats && !isCustom ? '' : 'hidden'
+                }`}
+              >
+                <svg class="w-4 h-4 text-amber-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                </svg>
+                <span>Seuil minimal éditeur appliqué : facturation plancher de <strong class="font-mono">{tool.minimumSeats}</strong> licences.</span>
+              </div>
+            </div>
+
+            <div class="space-y-2 mb-5">
+              <div class="flex flex-wrap gap-1.5">
+                {tool.certifications.map((cert) => (
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-zinc-50 text-zinc-700 border border-zinc-200 rounded text-[11px] font-medium">
+                    {cert}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-zinc-200 flex flex-col sm:flex-row gap-2.5">
+            <a
+              href={`/go/${tool.slug}`}
+              target="_blank"
+              rel="nofollow noopener"
+              class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-xs transition-colors text-center"
+            >
+              <span>Vérifier l'Offre et Devis Officiel</span>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+            <button
+              type="button"
+              data-matrice-btn
+              data-tool-name={tool.name}
+              class="inline-flex items-center justify-center px-3.5 py-2.5 rounded bg-white hover:bg-zinc-100 text-zinc-800 border border-zinc-200 text-xs font-medium transition-colors text-center cursor-pointer"
+            >
+              Matrice PDF
+            </button>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</section>
+
+<script>
+  function initCalculators() {
+    const calculators = document.querySelectorAll('[data-tco-calculator]');
+    const formatter = new Intl.NumberFormat('fr-FR', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    });
+
+    const activeAnimations = new WeakMap<Element, number>();
+
+    function animateValue(el: Element, start: number, end: number, durationMs = 250) {
+      const existingFrame = activeAnimations.get(el);
+      if (existingFrame) {
+        cancelAnimationFrame(existingFrame);
+      }
+      if (start === end) {
+        el.textContent = formatter.format(Math.round(end));
+        return;
+      }
+      const startTime = performance.now();
+      function step(now: number) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / durationMs, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(start + (end - start) * eased);
+        el.textContent = formatter.format(current);
+        if (progress < 1) {
+          const id = requestAnimationFrame(step);
+          activeAnimations.set(el, id);
+        }
+      }
+      const id = requestAnimationFrame(step);
+      activeAnimations.set(el, id);
+    }
+
+    calculators.forEach((calc) => {
+      if ((calc as HTMLElement).dataset.bound === 'true') {
+        return;
+      }
+      (calc as HTMLElement).dataset.bound = 'true';
+
+      const slider = calc.querySelector('[data-seats-slider]') as HTMLInputElement | null;
+      const display = calc.querySelector('[data-seats-display]') as HTMLElement | null;
+      const sovereignFilter = calc.querySelector('[data-sovereign-filter]') as HTMLInputElement | null;
+      const savingsBadge = calc.querySelector('[data-savings-badge]') as HTMLElement | null;
+      const presetButtons = calc.querySelectorAll('[data-seat-preset]');
+      const cards = calc.querySelectorAll('[data-tool-card]');
+      const matriceButtons = calc.querySelectorAll('[data-matrice-btn]');
+
+      function updateCalculation(seats: number) {
+        if (display) {
+          display.textContent = String(seats);
+        }
+        if (slider && Number(slider.value) !== seats) {
+          slider.value = String(seats);
+        }
+
+        presetButtons.forEach((btn) => {
+          const presetVal = Number((btn as HTMLElement).dataset.seatPreset);
+          if (presetVal === seats) {
+            btn.classList.remove('bg-white', 'text-zinc-700', 'border-zinc-200');
+            btn.classList.add('bg-zinc-900', 'text-white', 'border-zinc-900');
+          } else {
+            btn.classList.add('bg-white', 'text-zinc-700', 'border-zinc-200');
+            btn.classList.remove('bg-zinc-900', 'text-white', 'border-zinc-900');
+          }
+        });
+
+        const annualValuesForComparison: number[] = [];
+        const cardMetrics: { card: HTMLElement; effectiveSeats: number; monthly: number; annual: number; benchmarkAnnual: number; isCustom: boolean; minSeats: number }[] = [];
+
+        cards.forEach((cardEl) => {
+          const card = cardEl as HTMLElement;
+          const price = Number(card.dataset.price || 0);
+          const model = card.dataset.model || 'PER_ENDPOINT';
+          const category = card.dataset.category || 'EDR_XDR';
+          const minSeats = Number(card.dataset.minSeats || 1);
+          const isSovereign = card.dataset.sovereign === 'true';
+
+          if (sovereignFilter && sovereignFilter.checked && !isSovereign) {
+            card.classList.add('opacity-40');
+          } else {
+            card.classList.remove('opacity-40');
+          }
+
+          const effectiveSeats = Math.max(seats, minSeats);
+          const isCustom = model === 'CUSTOM_QUOTE' || price === 0;
+          const monthly = isCustom ? 0 : model === 'FLAT_RATE' ? price : effectiveSeats * price;
+          const annual = monthly * 12;
+          const benchmarkAnnual = isCustom
+            ? (category === 'GRC_NIS2' ? 490 : effectiveSeats * 14.5) * 12
+            : annual;
+
+          annualValuesForComparison.push(benchmarkAnnual);
+          cardMetrics.push({ card, effectiveSeats, monthly, annual, benchmarkAnnual, isCustom, minSeats });
+        });
+
+        const maxAnnual = Math.max(...annualValuesForComparison, 1);
+        const minAnnual = Math.min(...annualValuesForComparison);
+        const savings = Math.max(0, Math.round(maxAnnual - minAnnual));
+
+        if (savingsBadge) {
+          savingsBadge.textContent = `Écart budgétaire : -${formatter.format(savings)} € / an sur ${seats} postes`;
+        }
+
+        cardMetrics.forEach(({ card, effectiveSeats, monthly, annual, benchmarkAnnual, isCustom, minSeats }) => {
+          const pct = Math.max(12, Math.round((benchmarkAnnual / maxAnnual) * 100));
+          const barEl = card.querySelector('[data-cost-bar]') as HTMLElement | null;
+          const barLabel = card.querySelector('[data-bar-label]') as HTMLElement | null;
+
+          if (barEl) {
+            barEl.style.width = `${pct}%`;
+          }
+          if (barLabel) {
+            barLabel.textContent = `${pct}%`;
+          }
+
+          if (isCustom) {
+            return;
+          }
+
+          const prevMonthly = Number(card.dataset.currentMonthly || monthly);
+          const prevAnnual = Number(card.dataset.currentAnnual || annual);
+          card.dataset.currentMonthly = String(Math.round(monthly));
+          card.dataset.currentAnnual = String(Math.round(annual));
+
+          const monthlyEl = card.querySelector('[data-monthly-cost]');
+          const annualEl = card.querySelector('[data-annual-cost]');
+          const billedSeatsEl = card.querySelector('[data-billed-seats]');
+          const warningEl = card.querySelector('[data-min-warning]');
+
+          if (monthlyEl) animateValue(monthlyEl, prevMonthly, monthly, 250);
+          if (annualEl) animateValue(annualEl, prevAnnual, annual, 250);
+          if (billedSeatsEl) billedSeatsEl.textContent = `Facturé sur ${effectiveSeats} postes`;
+
+          if (warningEl) {
+            if (seats < minSeats) {
+              warningEl.classList.remove('hidden');
+            } else {
+              warningEl.classList.add('hidden');
+            }
+          }
+        });
+      }
+
+      if (slider) {
+        slider.addEventListener('input', () => {
+          updateCalculation(Number(slider.value));
+        });
+      }
+
+      presetButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const val = Number((btn as HTMLElement).dataset.seatPreset || 50);
+          updateCalculation(val);
+        });
+      });
+
+      if (sovereignFilter) {
+        sovereignFilter.addEventListener('change', () => {
+          const currentSeats = slider ? Number(slider.value) : 50;
+          updateCalculation(currentSeats);
+        });
+      }
+
+      matriceButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const toolName = (btn as HTMLElement).dataset.toolName || '';
+          const currentSeats = slider ? Number(slider.value) : 50;
+          const captureSection = document.getElementById('capture-devis');
+          const toolInput = document.getElementById('lead-tool') as HTMLInputElement | null;
+          const seatsInput = document.getElementById('lead-seats') as HTMLInputElement | null;
+          const emailInput = document.getElementById('lead-email') as HTMLInputElement | null;
+
+          if (toolInput) {
+            toolInput.value = toolName;
+          }
+          if (seatsInput) {
+            seatsInput.value = `${currentSeats} postes`;
+          }
+          if (captureSection) {
+            captureSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          if (emailInput) {
+            setTimeout(() => emailInput.focus(), 450);
+          }
+        });
+      });
+    });
+  }
+
+  initCalculators();
+  document.addEventListener('astro:page-load', initCalculators);
+</script>

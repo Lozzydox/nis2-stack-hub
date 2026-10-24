@@ -1,0 +1,72 @@
+---
+title: "Veeam vs Acronis : Comparatif Sauvegarde Immuable NIS2"
+metaDescription: "Comparatif technique et TCO entre Veeam Data Platform et Acronis Cyber Protect Cloud pour la sauvegarde immuable et le PRA/PCA conforme NIS2."
+publishDate: "2026-10-24"
+updatedDate: "2026-10-24"
+category: "BACKUP_DR"
+toolsCompared:
+  - "acronis-cyber-protect"
+  - "veeam-data-platform"
+tldrVerdict: "Acronis Cyber Protect Cloud s'impose pour les PME de 10 à 150 postes cherchant une solution suisse souveraine unifiant sauvegarde immuable, anti-rançongiciel et gestion des correctifs dès 5,90 € / poste / mois. Veeam Data Platform domine pour les ETI et infrastructures virtualisées critiques (VMware, Hyper-V, SAN) exigeant des tests de restauration automatisés SureBackup et des dépôts Linux durcis."
+nis2ComplianceFocus: "Article 21.2 (Continuité d'activité, gestion des sauvegardes et reprise après sinistre 21.2.c, traitement des incidents 21.2.b et tests d'efficacité 21.2.f)"
+faq:
+  - question: "L'Article 21.2.c de la directive NIS2 rend-il la sauvegarde immuable obligatoire ?"
+    answer: "Oui. Les rançongiciels modernes ciblent prioritairement les serveurs de sauvegarde et les clichés VSS pour empêcher toute restauration. La mise en place de sauvegardes immuables (WORM / Object Lock ou Hardened Linux Repository) selon la règle 3-2-1-1-0 est indispensable pour démontrer la résilience opérationnelle exigée par l'Article 21.2.c."
+  - question: "Pourquoi Veeam n'est-il plus considéré comme un éditeur européen souverain ?"
+    answer: "Bien qu'historiquement fondé en Suisse en 2006, Veeam Software a transféré son siège social mondial aux États-Unis (Ohio puis Washington) à la suite de son rachat par le fonds américain Insight Partners. L'entité juridique mère relève désormais du droit américain, contrairement à Acronis dont le siège demeure à Schaffhouse en Suisse."
+  - question: "Comment prouver à un auditeur ANSSI ou CCB que les sauvegardes sont réellement restaurables ?"
+    answer: "La simple présence d'un fichier de sauvegarde ne suffit pas en audit NIS2 (Article 21.2.f). Veeam automatise cette preuve via SureBackup (démarrage quotidien des machines virtuelles en réseau isolé avec rapport de contrôle), tandis qu'Acronis propose l'exécution planifiée de machines de reprise dans son cloud Disaster Recovery."
+---
+
+Pour une PME de 5 à 150 postes ou un prestataire MSP souhaitant consolider sa continuité d'activité sous juridiction européenne/suisse sans multiplier les agents, **Acronis Cyber Protect Cloud** offre l'approche la plus rentable (dès 5,90 € / poste / mois) en réunissant sauvegarde immuable, stockage cloud souverain et patch management. Pour une ETI de 50 à 500 charges de travail disposant d'une équipe d'infrastructure dédiée et de clusters de virtualisation denses, **Veeam Data Platform** (dès 12,50 € / charge / mois par pack de 10 licences VUL) demeure la référence industrielle grâce à ses dépôts Linux immuables et ses vérifications de restaurabilité automatisées SureBackup.
+
+## Verdict Exécutif par Profil d'Entreprise
+
+### Profil 1 : PME & Entité Importante cherchant la Souveraineté et la Simplicité (5 à 150 postes)
+* **Recommandation :** Acronis Cyber Protect Cloud
+* **Justification :** Son siège suisse à Schaffhouse et ses centres de données situés en France et en Allemagne soustraient les sauvegardes à l'extraterritorialité du Cloud Act américain. L'agent unique protège aussi bien les ordinateurs portables des dirigeants que les serveurs Windows/Linux et Microsoft 365. Pour compléter la défense active des terminaux, consultez notre [comparatif des EDR souverains européens NIS2](/comparatifs/comparatif-edr-souverain-europeen-nis2).
+
+### Profil 2 : ETI, Industrie & Infrastructures Virtualisées Critiques (50 à 500+ serveurs/VM)
+* **Recommandation :** Veeam Data Platform
+* **Justification :** Veeam dissocie totalement le logiciel d'orchestration du matériel de stockage. Associé à un serveur Linux durci sur site (Hardened Repository sans accès root SSH) et une réplication vers un stockage objet S3 européen avec Object Lock, il garantit une architecture 3-2-1-1-0 inaltérable, même en cas de compromission complète de l'Active Directory que nous recommandons par ailleurs de verrouiller via un [bastion étudié dans notre duel Wallix vs Proton Pass](/comparatifs/wallix-pam4all-vs-proton-pass-iam-nis2).
+
+## Tableau Comparatif Technique & Réglementaire
+
+| Critère d'évaluation | Acronis Cyber Protect Cloud | Veeam Data Platform |
+| :--- | :--- | :--- |
+| **Prix de départ indicatif** | 5,90 € / poste / mois (hors stockage cloud) | 12,50 € / charge / mois (pack de 10 licences VUL) |
+| **Modèle de facturation** | Par endpoint + volumétrie Go (PER_ENDPOINT) | Par pack de 10 charges universelles (PER_ENDPOINT) |
+| **Engagement minimal** | 5 licences | 10 charges de travail (1 pack VUL) |
+| **Pays de juridiction** | Suisse (Schaffhouse) | États-Unis (Siège social transféré aux USA) |
+| **Souveraineté & Cloud Act** | Oui (Droit suisse LPD & RGPD, exempt Cloud Act) | Non (Entité mère américaine) |
+| **Certifications détenues** | ISO/IEC 27001, ISO 27017, SOC 2 Type II | ISO/IEC 27001, SOC 2 Type II, Common Criteria EAL2+ |
+| **Couverture NIS2 Article 21** | 21.2.b, 21.2.c, 21.2.e | 21.2.b, 21.2.c, 21.2.f |
+| **Immuabilité des sauvegardes** | Stockage WORM Acronis Cloud ou S3 Object Lock | Hardened Linux Repository (XFS) & S3 Object Lock |
+| **Test de PRA automatisé** | Bascule Disaster Recovery Cloud à la demande | SureBackup (vérification quotidienne en bac à sable) |
+
+## Analyse Technique Granulaire des Architectures
+
+### Immuabilité WORM et Résistance à la Destruction par Administrateur Compromis
+Lors d'une attaque par rançongiciel menée par un groupe APT, les attaquants cherchent d'abord à prendre le contrôle de la console de sauvegarde pour purger les archives avant de chiffrer le parc.
+
+Veeam Data Platform pare à ce scénario grâce à son architecture Hardened Linux Repository : les fichiers de sauvegarde sont écrits sur un système de fichiers XFS utilisant des attributs d'immuabilité natifs du noyau Linux et un protocole de transport propriétaire sur canal unique sans privilèges root. Même si le serveur d'administration Veeam (VBR) est intégralement compromis, aucune commande distante ne peut supprimer ni modifier les points de restauration avant l'expiration du délai légal.
+
+Acronis Cyber Protect implémente un mécanisme de stockage immuable en mode gouvernance ou conformité stricte dans ses datacenters suisses et européens : les sauvegardes supprimées par un compte administrateur piraté sont conservées dans une zone de quarantaine scellée pendant une durée définie (par exemple 14 à 90 jours), interdisant toute purge définitive sans validation multi-acteurs.
+
+### Vérification Continue d'Intégrité et Détection de Malware dans les Flux
+* **Veeam Inline Malware Detection :** Analyse l'entropie des blocs de données à la volée pendant la sauvegarde. Si un début de chiffrement massif est détecté, Veeam lève une alerte immédiate dans le SIEM et marque le point de restauration comme suspect afin d'éviter la réinfection lors du PRA.
+* **Acronis Active Protection :** Surveille en temps réel les appels système sur le poste ou le serveur et restaure automatiquement les fichiers modifiés par un processus non autorisé à partir de son cache local.
+
+## Analyse des Coûts Réels et Frais Cachés
+
+1. **Facturation de la volumétrie Cloud chez Acronis :** Le tarif de base à 5,90 € / mois couvre la licence logicielle de protection par poste. Dès que l'entreprise active l'hébergement dans le cloud Acronis ou l'option Disaster Recovery, la facturation au gigaoctet (souvent entre 0,05 € et 0,09 € / Go / mois) représente rapidement le poste budgétaire principal.
+2. **Coût de la licence VUL chez Veeam pour les postes de travail :** La licence universelle Veeam (VUL) est particulièrement compétitive pour protéger de gros serveurs de virtualisation ou des bases de données critiques. En revanche, utiliser une licence VUL complète pour sauvegarder de simples ordinateurs portables bureautiques s'avère onéreux ; il est alors préférable d'opter pour des packs Veeam Agent dédiés ou de centraliser les fichiers utilisateurs sur SharePoint/OneDrive.
+3. **Cohérence de l'architecture globale :** Pour documenter vos tests de restauration trimestriels dans votre registre d'homologation, consultez notre [comparatif des plateformes GRC Tenacy vs Vanta](/comparatifs/tenacy-vs-vanta-grc-nis2) ainsi que notre [comparatif des scanners de vulnérabilités Intruder vs Greenbone](/comparatifs/scanner-vulnerabilites-pentest-continu-nis2).
+
+### Preuves Visuelles des Portails et Grilles Tarifaires Officielles
+
+#### Portail Officiel Acronis Cyber Protect Cloud
+![Preuve tarifaire Acronis Cyber Protect Cloud](/proofs/acronis-cyber-protect-pricing.webp)
+
+#### Portail Officiel Veeam Data Platform
+![Preuve tarifaire Veeam Data Platform](/proofs/veeam-data-platform-pricing.webp)

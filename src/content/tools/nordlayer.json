@@ -1,0 +1,35 @@
+{
+  "name": "NordLayer",
+  "slug": "nordlayer",
+  "category": "SASE_VPN",
+  "vendorCountry": "Lituanie / Pays-Bas (Groupe Nord Security)",
+  "isEuropeanSovereign": true,
+  "startingPriceMonthlyEur": 8,
+  "pricingModel": "PER_USER",
+  "minimumSeats": 5,
+  "nis2ArticlesCovered": [
+    "Article 21.2.h (Politiques et procédures relatives à l'utilisation de la cryptographie et du chiffrement)",
+    "Article 21.2.i (Sécurité des ressources humaines, contrôle d'accès et gestion des actifs)",
+    "Article 21.2.j (Authentification multifacteur et communications sécurisées)"
+  ],
+  "certifications": [
+    "ISO/IEC 27001:2022",
+    "SOC 2 Type II",
+    "Conformité RGPD"
+  ],
+  "pros": [
+    "Déploiement SASE et Zero Trust Network Access (ZTNA) en moins de 15 minutes sans matériel réseau dédié",
+    "Chiffrement NordLynx (basé sur WireGuard) et AES-256 offrant d'excellents débits pour les collaborateurs distants",
+    "Contrôle de posture des appareils (Device Posture Security) et intégration SSO/MFA native (Entra ID, Okta, Google Workspace)",
+    "Tarification claire dès 5 utilisateurs (paliers Lite à 8 €, Core à 11 € et Premium à 14 € par utilisateur/mois)"
+  ],
+  "cons": [
+    "Les serveurs dédiés avec IP fixe requièrent un supplément payant obligatoire (environ 40 € / mois par passerelle dédiée)",
+    "Fonctions avancées de micro-segmentation réseau et d'interconnexion Site-to-Site réservées au palier supérieur Premium"
+  ],
+  "officialUrl": "https://nordlayer.com/fr/pricing/",
+  "affiliateUrl": "https://nordlayer.com/fr/pricing/",
+  "pricingScreenshotPath": "/proofs/nordlayer-pricing.webp",
+  "lastVerifiedDate": "2026-10-24",
+  "hasActiveAffiliateLink": false
+}

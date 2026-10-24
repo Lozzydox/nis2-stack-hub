@@ -1,0 +1,214 @@
+{
+  "activeThreads": [
+    {
+      "threadId": "THREAD-IAM-PAM-001",
+      "silo": "IAM_PAM",
+      "targetSlug": "wallix-pam4all-vs-proton-pass-iam-nis2",
+      "tools": ["wallix-pam4all", "proton-pass-business"],
+      "status": "PUBLISHED_AND_OPTIMIZED",
+      "participants": [
+        "agent-01-strategist",
+        "agent-02-scout",
+        "agent-03-writer",
+        "agent-04-critic",
+        "agent-05-cro"
+      ],
+      "summary": "Ouverture et peuplement du silo IAM_PAM (Article 21.2.i, 21.2.j et 21.2.d) opposant le bastion français certifié ANSSI CSPN Wallix PAM4ALL au gestionnaire d'identifiants suisse Zero-Knowledge Proton Pass Business."
+    },
+    {
+      "threadId": "THREAD-BACKUP-DR-003",
+      "silo": "BACKUP_DR",
+      "targetSlug": "veeam-vs-acronis-sauvegarde-immuable-nis2",
+      "tools": ["acronis-cyber-protect", "veeam-data-platform"],
+      "status": "PUBLISHED_AND_OPTIMIZED",
+      "participants": [
+        "agent-01-strategist",
+        "agent-02-scout",
+        "agent-03-writer",
+        "agent-04-critic",
+        "agent-05-cro"
+      ],
+      "summary": "Ouverture et peuplement du silo BACKUP_DR (Article 21.2.c) opposant Acronis Cyber Protect Cloud (Suisse, agent unifié WORM) à Veeam Data Platform (packs VUL, Hardened Linux Repository et SureBackup)."
+    },
+    {
+      "threadId": "THREAD-VULN-PENTEST-004",
+      "silo": "VULN_PENTEST",
+      "targetSlug": "scanner-vulnerabilites-pentest-continu-nis2",
+      "tools": ["intruder-scanner", "greenbone-enterprise"],
+      "status": "PUBLISHED_AND_OPTIMIZED",
+      "participants": [
+        "agent-01-strategist",
+        "agent-02-scout",
+        "agent-03-writer",
+        "agent-04-critic",
+        "agent-05-cro"
+      ],
+      "summary": "Ouverture et peuplement du silo VULN_PENTEST (Article 21.2.e et 21.2.f) opposant Intruder Vulnerability Scanner (EASM Cloud continu) à Greenbone Enterprise OpenVAS (Appliance On-Premises souveraine allemande BSI)."
+    }
+  ],
+  "messageQueue": [
+    {
+      "messageId": "MSG-001",
+      "threadId": "THREAD-IAM-PAM-001",
+      "fromAgent": "agent-01-strategist",
+      "toAgent": "agent-02-scout",
+      "type": "DATA_REQUEST",
+      "timestamp": "2026-10-24T14:03:10+02:00",
+      "payload": {
+        "silo": "IAM_PAM",
+        "priority": "HIGH",
+        "directive": "Auditer Wallix PAM4ALL (France) et Proton Pass Business (Suisse) pour couvrir l'Article 21.2.i et 21.2.j."
+      }
+    },
+    {
+      "messageId": "MSG-004",
+      "threadId": "THREAD-IAM-PAM-001",
+      "fromAgent": "agent-04-critic",
+      "toAgent": "agent-03-writer",
+      "type": "REDTEAM_REJECTION",
+      "timestamp": "2026-10-24T14:09:45+02:00",
+      "payload": {
+        "file": "src/content/comparisons/wallix-pam4all-vs-proton-pass-iam-nis2.mdx",
+        "severity": "BLOCKING",
+        "reasons": [
+          "Préciser le différentiel tarifaire Proton Pass Essentials (1,99 EUR) vs Professional SSO/SCIM (4,49 EUR) et les charges d'intégration Wallix (3 à 10 j/h)."
+        ]
+      }
+    },
+    {
+      "messageId": "MSG-006",
+      "threadId": "THREAD-IAM-PAM-001",
+      "fromAgent": "agent-04-critic",
+      "toAgent": "agent-05-cro",
+      "type": "APPROVED",
+      "timestamp": "2026-10-24T14:12:15+02:00",
+      "payload": {
+        "file": "src/content/comparisons/wallix-pam4all-vs-proton-pass-iam-nis2.mdx",
+        "verdict": "Correction v2 validée. Silo IAM_PAM conforme."
+      }
+    },
+    {
+      "messageId": "MSG-008",
+      "threadId": "THREAD-BACKUP-DR-003",
+      "fromAgent": "agent-01-strategist",
+      "toAgent": "agent-02-scout",
+      "type": "DATA_REQUEST",
+      "timestamp": "2026-10-24T14:30:30+02:00",
+      "payload": {
+        "silo": "BACKUP_DR",
+        "priority": "HIGH",
+        "directive": "Auditer Veeam Data Platform et Acronis Cyber Protect Cloud pour couvrir l'Article 21.2.c (Sauvegarde immuable et PRA/PCA)."
+      }
+    },
+    {
+      "messageId": "MSG-009",
+      "threadId": "THREAD-BACKUP-DR-003",
+      "fromAgent": "agent-04-critic",
+      "toAgent": "agent-02-scout",
+      "type": "REDTEAM_REJECTION",
+      "timestamp": "2026-10-24T14:31:50+02:00",
+      "payload": {
+        "file": "src/content/tools/veeam-data-platform.json",
+        "severity": "BLOCKING",
+        "reasons": [
+          "Vigilance Souveraineté : Ne pas qualifier Veeam de souverain suisse. Bien que fondé en Suisse en 2006, le siège social de Veeam a été transféré aux États-Unis suite au rachat par Insight Partners (isEuropeanSovereign: false). Seul Acronis conserve son siège à Schaffhouse en Suisse."
+        ]
+      }
+    },
+    {
+      "messageId": "MSG-010",
+      "threadId": "THREAD-BACKUP-DR-003",
+      "fromAgent": "agent-04-critic",
+      "toAgent": "agent-05-cro",
+      "type": "APPROVED",
+      "timestamp": "2026-10-24T14:33:55+02:00",
+      "payload": {
+        "file": "src/content/comparisons/veeam-vs-acronis-sauvegarde-immuable-nis2.mdx",
+        "verdict": "Qualification juridique Veeam (US) vs Acronis (Suisse) et architecture Hardened Linux Repository XFS validées."
+      }
+    },
+    {
+      "messageId": "MSG-011",
+      "threadId": "THREAD-VULN-PENTEST-004",
+      "fromAgent": "agent-01-strategist",
+      "toAgent": "agent-02-scout",
+      "type": "DATA_REQUEST",
+      "timestamp": "2026-10-24T14:32:10+02:00",
+      "payload": {
+        "silo": "VULN_PENTEST",
+        "priority": "HIGH",
+        "directive": "Auditer Intruder Vulnerability Scanner (Royaume-Uni, EASM continu) et Greenbone Enterprise OpenVAS (Allemagne, BSI On-Premises) pour couvrir l'Article 21.2.e."
+      }
+    },
+    {
+      "messageId": "MSG-012",
+      "threadId": "THREAD-VULN-PENTEST-004",
+      "fromAgent": "agent-04-critic",
+      "toAgent": "agent-05-cro",
+      "type": "APPROVED",
+      "timestamp": "2026-10-24T14:34:30+02:00",
+      "payload": {
+        "file": "src/content/comparisons/scanner-vulnerabilites-pentest-continu-nis2.mdx",
+        "verdict": "Silo VULN_PENTEST validé. Couverture des 6/6 silos Article 21 atteinte."
+      }
+    },
+    {
+      "messageId": "MSG-013",
+      "threadId": "THREAD-VULN-PENTEST-004",
+      "fromAgent": "agent-05-cro",
+      "toAgent": "agent-01-strategist",
+      "type": "CRO_OPTIMIZATION",
+      "timestamp": "2026-10-24T14:34:55+02:00",
+      "payload": {
+        "routesActivated": [
+          "/go/veeam-data-platform",
+          "/go/acronis-cyber-protect",
+          "/go/intruder-scanner",
+          "/go/greenbone-enterprise"
+        ],
+        "tcoCalculatorStatus": "13 outils câblés dans TcoCalculator avec pré-remplissage automatique du formulaire #capture-devis et téléchargement direct de /matrice-homologation-nis2.pdf."
+      }
+    }
+  ],
+  "swarmMetrics": {
+    "totalToolsAudited": 13,
+    "europeanSovereignTools": 9,
+    "totalComparisonsPublished": 7,
+    "totalAuditsExecuted": 22,
+    "redTeamRejections": 2,
+    "redTeamRejectionRate": "18.2%",
+    "lastQualityGateStatus": "PASS",
+    "siloCoverage": {
+      "EDR_XDR": {
+        "toolsCount": 3,
+        "comparisonsCount": 2,
+        "status": "ACTIVE"
+      },
+      "SASE_VPN": {
+        "toolsCount": 2,
+        "comparisonsCount": 1,
+        "status": "ACTIVE"
+      },
+      "GRC_NIS2": {
+        "toolsCount": 2,
+        "comparisonsCount": 1,
+        "status": "ACTIVE"
+      },
+      "IAM_PAM": {
+        "toolsCount": 2,
+        "comparisonsCount": 1,
+        "status": "ACTIVE"
+      },
+      "BACKUP_DR": {
+        "toolsCount": 2,
+        "comparisonsCount": 1,
+        "status": "ACTIVE"
+      },
+      "VULN_PENTEST": {
+        "toolsCount": 2,
+        "comparisonsCount": 1,
+        "status": "ACTIVE"
+      }
+    }
+  }
+}

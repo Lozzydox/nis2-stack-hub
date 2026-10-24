@@ -1,0 +1,36 @@
+{
+  "name": "Acronis Cyber Protect Cloud",
+  "slug": "acronis-cyber-protect",
+  "category": "BACKUP_DR",
+  "vendorCountry": "Suisse",
+  "isEuropeanSovereign": true,
+  "startingPriceMonthlyEur": 5.9,
+  "pricingModel": "PER_ENDPOINT",
+  "minimumSeats": 5,
+  "nis2ArticlesCovered": [
+    "Article 21.2.c (Continuité des activités, gestion des sauvegardes immuables et reprise après sinistre)",
+    "Article 21.2.b (Protection anti-rançongiciel active et restauration rapide d'image complète)",
+    "Article 21.2.e (Gestion des vulnérabilités et déploiement automatisé des correctifs)"
+  ],
+  "certifications": [
+    "ISO/IEC 27001",
+    "ISO/IEC 27017",
+    "SOC 2 Type II",
+    "Loi Fédérale Suisse LPD & RGPD"
+  ],
+  "pros": [
+    "Siège social basé à Schaffhouse en Suisse avec datacenters européens souverains (Paris, Francfort) hors juridiction US Cloud Act",
+    "Agent unique unifiant sauvegarde image complète, stockage immuable WORM, anti-malware comportemental et Patch Management",
+    "Restauration universelle (Acronis Universal Restore) et bascule Disaster Recovery dans le cloud en quelques minutes",
+    "Tarification accessible dès 5 postes (à partir de 5,90 € / poste / mois hors volumétrie de stockage cloud additionnelle)"
+  ],
+  "cons": [
+    "Facturation du stockage cloud au gigaoctet pouvant alourdir la facture mensuelle en cas de rétention longue mal paramétrée",
+    "Interface très dense regroupant de nombreux modules (EDR, DLP, Backup, RMM) dont certains sont facturés en options séparées"
+  ],
+  "officialUrl": "https://www.acronis.com/fr-fr/products/cloud/cyber-protect/",
+  "affiliateUrl": "https://www.acronis.com/fr-fr/products/cloud/cyber-protect/",
+  "pricingScreenshotPath": "/proofs/acronis-cyber-protect-pricing.webp",
+  "lastVerifiedDate": "2026-10-24",
+  "hasActiveAffiliateLink": false
+}

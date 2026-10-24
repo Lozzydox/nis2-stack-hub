@@ -1,0 +1,169 @@
+---
+const nodes = [
+  {
+    step: '01',
+    code: 'SASE_VPN',
+    label: 'Accès Réseau ZTNA',
+    art: 'Art. 21.2.i / h',
+    vendors: 'NordLayer · Tailscale',
+    href: '#silo-SASE_VPN'
+  },
+  {
+    step: '02',
+    code: 'IAM_PAM',
+    label: 'Identités & Bastion PAM',
+    art: 'Art. 21.2.i / j',
+    vendors: 'Wallix · Proton Pass',
+    href: '#silo-IAM_PAM'
+  },
+  {
+    step: '03',
+    code: 'EDR_XDR',
+    label: 'Postes & Serveurs',
+    art: 'Art. 21.2.b / g',
+    vendors: 'HarfangLab · Bitdefender · S1',
+    href: '#silo-EDR_XDR'
+  },
+  {
+    step: '04',
+    code: 'VULN_PENTEST',
+    label: 'Surface d Attaque CVE',
+    art: 'Art. 21.2.e / d',
+    vendors: 'Greenbone · Intruder',
+    href: '#silo-VULN_PENTEST'
+  },
+  {
+    step: '05',
+    code: 'BACKUP_DR',
+    label: 'Sauvegarde Immuable',
+    art: 'Art. 21.2.c',
+    vendors: 'Veeam · Acronis',
+    href: '#silo-BACKUP_DR'
+  },
+  {
+    step: '06',
+    code: 'GRC_NIS2',
+    label: 'Pilotage GRC & Audit',
+    art: 'Art. 21.2.a / f',
+    vendors: 'Tenacy · Vanta',
+    href: '#silo-GRC_NIS2'
+  }
+];
+---
+
+<div class="bg-white border border-zinc-200 rounded-md overflow-hidden shadow-[0_2px_10px_rgba(9,9,11,0.03)] animate-fade-up-delay-1">
+  <div class="bg-zinc-100/80 border-b border-zinc-200 px-4 py-3 flex items-center justify-between gap-2">
+    <div class="flex items-center gap-2">
+      <svg class="w-4 h-4 text-zinc-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+      </svg>
+      <span class="font-display font-bold text-xs uppercase tracking-wider text-zinc-900">
+        Blueprint Architecture Réseau NIS2 (Article 21)
+      </span>
+    </div>
+
+    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-[11px] font-semibold">
+      <span class="w-2 h-2 rounded-xs bg-emerald-600 inline-block"></span>
+      6/6 Silos Homologués
+    </span>
+  </div>
+
+  <div class="p-4 sm:p-5 bg-zinc-50/50">
+    <div class="mb-3">
+      <svg class="w-full h-28 sm:h-32 bg-white border border-zinc-200 rounded p-2" viewBox="0 0 600 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="55" y1="36" x2="295" y2="36" stroke="#E4E4E7" stroke-width="2" />
+        <line x1="295" y1="36" x2="535" y2="36" stroke="#E4E4E7" stroke-width="2" />
+        <path d="M535 36 V86 H295" stroke="#E4E4E7" stroke-width="2" />
+        <line x1="295" y1="86" x2="55" y2="86" stroke="#E4E4E7" stroke-width="2" />
+
+        <line x1="55" y1="36" x2="295" y2="36" stroke="#059669" stroke-width="1.75" class="blueprint-flow-line" />
+        <line x1="295" y1="36" x2="535" y2="36" stroke="#09090B" stroke-width="1.75" class="blueprint-flow-line" />
+        <path d="M535 36 V86 H295" stroke="#09090B" stroke-width="1.75" class="blueprint-flow-line" />
+        <line x1="295" y1="86" x2="55" y2="86" stroke="#059669" stroke-width="1.75" class="blueprint-flow-line" />
+
+        <a href="#silo-SASE_VPN">
+          <g class="cursor-pointer">
+            <rect x="14" y="16" width="112" height="38" rx="4" fill="#FFFFFF" stroke="#09090B" stroke-width="1.5" />
+            <rect x="20" y="23" width="6" height="6" rx="1" fill="#059669" />
+            <text x="32" y="30" fill="#09090B" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="600">01 SASE_VPN</text>
+            <text x="20" y="44" fill="#52525B" font-family="Inter, sans-serif" font-size="8.5">Flux ZTNA Chiffré</text>
+          </g>
+        </a>
+
+        <a href="#silo-IAM_PAM">
+          <g class="cursor-pointer">
+            <rect x="244" y="16" width="112" height="38" rx="4" fill="#FFFFFF" stroke="#09090B" stroke-width="1.5" />
+            <rect x="250" y="23" width="6" height="6" rx="1" fill="#059669" />
+            <text x="262" y="30" fill="#09090B" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="600">02 IAM_PAM</text>
+            <text x="250" y="44" fill="#52525B" font-family="Inter, sans-serif" font-size="8.5">Bastion & MFA</text>
+          </g>
+        </a>
+
+        <a href="#silo-EDR_XDR">
+          <g class="cursor-pointer">
+            <rect x="474" y="16" width="112" height="38" rx="4" fill="#FFFFFF" stroke="#09090B" stroke-width="1.5" />
+            <rect x="480" y="23" width="6" height="6" rx="1" fill="#059669" />
+            <text x="492" y="30" fill="#09090B" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="600">03 EDR_XDR</text>
+            <text x="480" y="44" fill="#52525B" font-family="Inter, sans-serif" font-size="8.5">Postes & Serveurs</text>
+          </g>
+        </a>
+
+        <a href="#silo-VULN_PENTEST">
+          <g class="cursor-pointer">
+            <rect x="474" y="66" width="112" height="38" rx="4" fill="#FFFFFF" stroke="#09090B" stroke-width="1.5" />
+            <rect x="480" y="73" width="6" height="6" rx="1" fill="#09090B" />
+            <text x="492" y="80" fill="#09090B" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="600">04 VULN_SCAN</text>
+            <text x="480" y="94" fill="#52525B" font-family="Inter, sans-serif" font-size="8.5">Audit CVE Continu</text>
+          </g>
+        </a>
+
+        <a href="#silo-BACKUP_DR">
+          <g class="cursor-pointer">
+            <rect x="244" y="66" width="112" height="38" rx="4" fill="#FFFFFF" stroke="#09090B" stroke-width="1.5" />
+            <rect x="250" y="73" width="6" height="6" rx="1" fill="#059669" />
+            <text x="262" y="80" fill="#09090B" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="600">05 BACKUP_DR</text>
+            <text x="250" y="94" fill="#52525B" font-family="Inter, sans-serif" font-size="8.5">Stockage WORM</text>
+          </g>
+        </a>
+
+        <a href="#silo-GRC_NIS2">
+          <g class="cursor-pointer">
+            <rect x="14" y="66" width="112" height="38" rx="4" fill="#F4F4F5" stroke="#059669" stroke-width="1.5" />
+            <rect x="20" y="73" width="6" height="6" rx="1" fill="#059669" />
+            <text x="32" y="80" fill="#09090B" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="600">06 GRC_NIS2</text>
+            <text x="20" y="94" fill="#059669" font-family="Inter, sans-serif" font-size="8.5" font-weight="600">Homologation COMEX</text>
+          </g>
+        </a>
+      </svg>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+      {nodes.map((node) => (
+        <a
+          href={node.href}
+          class="bg-white border border-zinc-200 hover:border-zinc-400 rounded p-3 flex items-start justify-between gap-2 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm group"
+        >
+          <div>
+            <div class="flex items-center gap-1.5 mb-1">
+              <span class="font-mono text-[10px] font-semibold px-1.5 py-0.5 rounded bg-zinc-100 text-zinc-800 border border-zinc-200">
+                {node.step} // {node.code}
+              </span>
+              <span class="font-mono text-[10px] text-emerald-700 font-medium">
+                {node.art}
+              </span>
+            </div>
+            <p class="font-display font-bold text-xs text-zinc-950 group-hover:text-zinc-700 transition-colors">
+              {node.label}
+            </p>
+            <p class="text-[11px] text-zinc-500 mt-0.5">
+              {node.vendors}
+            </p>
+          </div>
+          <svg class="w-3.5 h-3.5 text-zinc-400 group-hover:text-zinc-900 shrink-0 mt-1 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+      ))}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+{
+  "name": "Vanta",
+  "slug": "vanta",
+  "category": "GRC_NIS2",
+  "vendorCountry": "États-Unis",
+  "isEuropeanSovereign": false,
+  "startingPriceMonthlyEur": 0,
+  "pricingModel": "CUSTOM_QUOTE",
+  "minimumSeats": 20,
+  "nis2ArticlesCovered": [
+    "Article 21.2.a (Politiques relatives à l'analyse des risques et à la sécurité des systèmes d'information)",
+    "Article 21.2.d (Évaluation automatisée des risques fournisseurs et tiers)",
+    "Article 21.2.f (Contrôle continu de l'efficacité des mesures de sécurité)"
+  ],
+  "certifications": [
+    "SOC 2 Type II",
+    "ISO/IEC 27001",
+    "Conformité RGPD"
+  ],
+  "pros": [
+    "Plus de 300 connecteurs API natifs (AWS, Azure, GitHub, Okta, MDM) collectant automatiquement les preuves de conformité",
+    "Tests de contrôle continus toutes les heures alertant immédiatement en cas de dérive de configuration (MFA désactivé, dépôt non chiffré)",
+    "Module Trust Center intégré permettant de partager les rapports de sécurité avec les clients B2B sous NDA",
+    "Prise en charge croisée SOC 2, ISO 27001, NIS2 et DORA avec déduplication automatique des preuves"
+  ],
+  "cons": [
+    "Éditeur américain soumis au Cloud Act US, nécessitant une vigilance particulière sur les métadonnées d'infrastructure collectées",
+    "Ticket d'entrée annuel élevé (généralement entre 9 500 € et 25 000 € / an selon l'effectif et les référentiels activés)"
+  ],
+  "officialUrl": "https://www.vanta.com/pricing",
+  "affiliateUrl": "https://www.vanta.com/pricing",
+  "pricingScreenshotPath": "/proofs/vanta-pricing.webp",
+  "lastVerifiedDate": "2026-10-24",
+  "hasActiveAffiliateLink": false
+}

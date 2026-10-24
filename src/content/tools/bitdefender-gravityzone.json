@@ -1,0 +1,37 @@
+{
+  "name": "Bitdefender GravityZone",
+  "slug": "bitdefender-gravityzone",
+  "category": "EDR_XDR",
+  "vendorCountry": "Roumanie",
+  "isEuropeanSovereign": true,
+  "startingPriceMonthlyEur": 2.04,
+  "pricingModel": "PER_ENDPOINT",
+  "minimumSeats": 5,
+  "nis2ArticlesCovered": [
+    "Article 21.2.a (Politiques relatives à l'analyse des risques et à la sécurité)",
+    "Article 21.2.b (Traitement des incidents de sécurité)",
+    "Article 21.2.e (Sécurité de l'acquisition, du développement et de la maintenance)",
+    "Article 21.2.g (Pratiques de base en cyber-hygiène)"
+  ],
+  "certifications": [
+    "ISO/IEC 27001",
+    "ISO/IEC 27017",
+    "ISO/IEC 27018",
+    "SOC 2 Type II"
+  ],
+  "pros": [
+    "Éditeur 100% européen (Roumanie) exempt des lois extraterritoriales américaines (US Cloud Act, FISA 702)",
+    "Agent unifié particulièrement léger avec un impact minime sur les ressources CPU et mémoire vive des postes",
+    "Excellente efficacité de blocage confirmée par les benchmarks AV-Comparatives et MITRE ATT&CK",
+    "Grille tarifaire publique transparente et accessible aux TPE/PME à partir de 5 à 10 postes"
+  ],
+  "cons": [
+    "Les modules avancés EDR, Sandbox Analyzer et Patch Management requièrent des add-ons payants",
+    "Capacité de remédiation automatisée moins poussée que le Rollback instantané au niveau du système de fichiers de SentinelOne"
+  ],
+  "officialUrl": "https://www.bitdefender.fr/business/smb-products/business-security.html",
+  "affiliateUrl": "https://www.bitdefender.fr/business/smb-products/business-security.html",
+  "pricingScreenshotPath": "/proofs/bitdefender-gravityzone-pricing.webp",
+  "lastVerifiedDate": "2026-10-24",
+  "hasActiveAffiliateLink": false
+}

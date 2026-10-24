@@ -1,0 +1,35 @@
+{
+  "name": "Intruder Vulnerability Scanner",
+  "slug": "intruder-scanner",
+  "category": "VULN_PENTEST",
+  "vendorCountry": "Royaume-Uni (Adéquation RGPD UE)",
+  "isEuropeanSovereign": true,
+  "startingPriceMonthlyEur": 9.5,
+  "pricingModel": "PER_ENDPOINT",
+  "minimumSeats": 10,
+  "nis2ArticlesCovered": [
+    "Article 21.2.e (Sécurité de la maintenance des systèmes, traitement et divulgation des vulnérabilités)",
+    "Article 21.2.f (Évaluation continue de l'efficacité des mesures de gestion des risques de cybersécurité)",
+    "Article 21.2.a (Analyse continue des risques liés à la surface d'attaque externe)"
+  ],
+  "certifications": [
+    "ISO/IEC 27001",
+    "SOC 2 Type II",
+    "CREST Approved"
+  ],
+  "pros": [
+    "Éditeur européen basé à Londres (bénéficiant de la décision d'adéquation RGPD UE et non soumis au US Cloud Act)",
+    "Surveillance proactive de la surface d'attaque externe (EASM) déclenchant un scan automatique dès l'apparition d'une CVE critique",
+    "Connecteurs cloud natifs (AWS, Azure, GCP, Cloudflare) détectant automatiquement toute nouvelle adresse IP ou sous-domaine exposé",
+    "Rapports d'audit clairs priorisés selon l'exploitabilité réelle (EPSS / CISA KEV) directement exploitables pour les contrôles NIS2"
+  ],
+  "cons": [
+    "Facturation distinguant les cibles d'infrastructure externes (IP/URL) et les agents internes sur postes de travail",
+    "Personnalisation bas niveau des scripts de test d'intrusion moins granulaire qu'une sonde Greenbone administrée sur site"
+  ],
+  "officialUrl": "https://www.intruder.io/pricing",
+  "affiliateUrl": "https://www.intruder.io/pricing",
+  "pricingScreenshotPath": "/proofs/intruder-scanner-pricing.webp",
+  "lastVerifiedDate": "2026-10-24",
+  "hasActiveAffiliateLink": false
+}

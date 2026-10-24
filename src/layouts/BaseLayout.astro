@@ -1,0 +1,136 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import BrandLogo from '../components/BrandLogo.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, jsonLd } = Astro.props;
+const siteOrigin = Astro.site ? Astro.site.origin : 'https://nis2-stack-hub.com';
+const ogImageUrl = `${siteOrigin}/og-cover.webp`;
+---
+
+<!doctype html>
+<html lang="fr" class="bg-zinc-50 text-zinc-950 antialiased">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <ClientRouter />
+    {jsonLd && (
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+    )}
+  </head>
+  <body class="min-h-screen flex flex-col bg-zinc-50 text-zinc-950">
+    <div class="bg-zinc-100/80 border-b border-zinc-200 text-xs text-zinc-600">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-3">
+          <span class="inline-flex items-center px-2 py-0.5 rounded bg-white text-zinc-800 border border-zinc-200 font-mono text-[11px] font-medium">
+            UE 2022/2555
+          </span>
+          <span class="text-zinc-600 hidden sm:inline">
+            Référentiel d'Audit Technique et Tarifaire — Article 21 NIS2 / DORA / CCB CyberFundamentals
+          </span>
+        </div>
+        <div class="flex items-center gap-4 text-xs text-zinc-600">
+          <span>Juridictions : France, Belgique, Suisse</span>
+          <span class="inline-flex items-center gap-1.5 text-emerald-700 font-medium">
+            <svg class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Base tarifaire vérifiée
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <header class="bg-white/95 backdrop-blur border-b border-zinc-200 sticky top-0 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="/" class="group focus:outline-none">
+          <BrandLogo size="md" showSubtitle={true} />
+        </a>
+
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-600">
+          <a href="/#silos" class="hover:text-zinc-950 transition-colors">Silos Article 21</a>
+          <a href="/#comparatifs" class="hover:text-zinc-950 transition-colors">Comparatifs & Duels</a>
+          <a href="/#matrice-outils" class="hover:text-zinc-950 transition-colors">Matrice Souveraineté</a>
+          <a
+            href="/#comparatifs"
+            class="px-3.5 py-1.5 rounded bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-xs transition-colors"
+          >
+            Simuler un TCO
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="bg-white text-zinc-600 border-t border-zinc-200 mt-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-zinc-200">
+          <div class="md:col-span-2">
+            <div class="mb-3">
+              <BrandLogo size="sm" showSubtitle={false} />
+            </div>
+            <p class="text-xs text-zinc-600 leading-relaxed max-w-md">
+              Cellule indépendante d'évaluation technologique et budgétaire destinée aux DSI, RSSI, MSP et dirigeants d'Entités Essentielles (EE) et d'Entités Importantes (EI) en France (ANSSI), Belgique (CCB) et Suisse (NCSC).
+            </p>
+          </div>
+          <div>
+            <p class="text-xs font-display font-semibold text-zinc-900 uppercase tracking-wider mb-3">
+              Silos d'Architecture
+            </p>
+            <ul class="space-y-2 text-xs text-zinc-600">
+              <li><a href="/#silos" class="hover:text-zinc-950 transition-colors">EDR / XDR & Postes (<span class="font-mono">Art. 21.2.b</span>)</a></li>
+              <li><a href="/#silos" class="hover:text-zinc-950 transition-colors">SASE / VPN Zero Trust (<span class="font-mono">Art. 21.2.i</span>)</a></li>
+              <li><a href="/#silos" class="hover:text-zinc-950 transition-colors">GRC & Pilotage NIS2 (<span class="font-mono">Art. 21.2.a</span>)</a></li>
+              <li><a href="/#silos" class="hover:text-zinc-950 transition-colors">IAM / PAM & Sauvegarde (<span class="font-mono">Art. 21.2.c</span>)</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-xs font-display font-semibold text-zinc-900 uppercase tracking-wider mb-3">
+              Méthodologie d'Audit
+            </p>
+            <ul class="space-y-2 text-xs text-zinc-600">
+              <li>Grilles tarifaires horodatées sous preuve WebP</li>
+              <li>Qualification d'exposition US Cloud Act / FISA 702</li>
+              <li>Calcul de TCO réel incluant paliers minimums</li>
+              <li>Indépendance éditoriale et transparence B2B</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4">
+          <p>© {new Date().getFullYear()} NIS2 // STACK HUB. Audit de conformité logicielle B2B.</p>
+          <p>Normes de référence : Directive (UE) 2022/2555, Règlement DORA, ISO/IEC 27001</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

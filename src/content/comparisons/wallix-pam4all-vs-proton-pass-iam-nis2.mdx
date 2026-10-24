@@ -1,0 +1,71 @@
+---
+title: "Wallix PAM4ALL vs Proton Pass : Comparatif IAM & PAM NIS2"
+metaDescription: "Comparatif entre le bastion français certifié ANSSI Wallix PAM4ALL et le coffre-fort suisse Proton Pass Business pour la conformité IAM/PAM NIS2."
+publishDate: "2026-10-24"
+updatedDate: "2026-10-24"
+category: "IAM_PAM"
+toolsCompared:
+  - "wallix-pam4all"
+  - "proton-pass-business"
+tldrVerdict: "Wallix PAM4ALL s'impose pour encadrer les comptes administrateurs système, les accès des prestataires externes et les environnements industriels (OT/IT) grâce à son bastion français certifié ANSSI CSPN. Proton Pass Business constitue la brique de cyber-hygiène idéale dès 1,99 € / utilisateur / mois pour équiper l'ensemble des collaborateurs d'une PME ou ETI avec un coffre-fort de mots de passe suisse chiffré de bout en bout."
+nis2ComplianceFocus: "Article 21.2 (Contrôle d'accès et comptes à privilèges 21.2.i, MFA 21.2.j, cyber-hygiène 21.2.g et sécurité des prestataires tiers 21.2.d)"
+faq:
+  - question: "Quelle est la différence réglementaire entre un EPM (Proton Pass) et un PAM (Wallix) sous NIS2 ?"
+    answer: "Un Enterprise Password Manager (EPM) comme Proton Pass Business sécurise les identifiants web et applicatifs quotidiens de tous les employés (Article 21.2.g et 21.2.j). Un Privileged Access Management (PAM) comme Wallix PAM4ALL isole, contrôle et enregistre en vidéo les sessions critiques (SSH, RDP) des administrateurs et sous-traitants sur les serveurs vitaux (Article 21.2.i et 21.2.d)."
+  - question: "Une PME ou ETI doit-elle choisir entre Wallix et Proton Pass ou combiner les deux ?"
+    answer: "Sur un parc de 50 à 500 postes, l'architecture recommandée en audit NIS2 consiste à déployer Proton Pass Business pour 100 % des effectifs bureautiques à faible coût (1,99 € à 4,49 € / mois) tout en réservant les licences de bastion Wallix PAM4ALL aux 5 à 25 comptes à hauts privilèges et aux accès des télémainteneurs externes."
+  - question: "Pourquoi la juridiction suisse de Proton Pass Business protège-t-elle contre le Cloud Act ?"
+    answer: "Proton AG est une société de droit suisse soumise à la Loi fédérale sur la protection des données (LPD). Contrairement aux gestionnaires de mots de passe américains, Proton n'est pas assujetti aux injonctions extraterritoriales du US Cloud Act et applique un chiffrement Zero-Knowledge intégral sur les métadonnées."
+---
+
+L'arbitrage entre **Wallix PAM4ALL** et **Proton Pass Business** répond à deux exigences distinctes mais complémentaires de l'Article 21 de la directive NIS2 : pour verrouiller les comptes à privilèges (Domain Admins, root Linux, automates industriels) et tracer chaque action des prestataires de maintenance tiers dès 10 licences cibles, le bastion français certifié ANSSI CSPN **Wallix PAM4ALL** est incontournable. Pour éradiquer la réutilisation de mots de passe faibles sur l'ensemble d'un parc de 10 à 500 collaborateurs avec un budget maîtrisé (1,99 € / utilisateur / mois) et une souveraineté helvétique totale, **Proton Pass Business** offre le meilleur rapport sécurité-prix du marché européen.
+
+## Verdict Exécutif par Profil d'Entreprise
+
+### Profil 1 : Entité Essentielle / Importante avec Prestataires Tiers et Serveurs Critiques (10 à 50 administrateurs)
+* **Recommandation :** Wallix PAM4ALL
+* **Justification :** La compromission d'un compte prestataire ou administrateur est le vecteur numéro un de déploiement de rançongiciels. Wallix coupe tout accès direct aux serveurs en interposant un bastion certifié ANSSI CSPN qui injecte les secrets sans jamais les révéler au sous-traitant et enregistre l'intégralité de la session en vidéo pour l'audit post-incident. Ce dispositif complète idéalement un [EDR souverain qualifié ANSSI tel qu'analysé dans notre dossier dédié](/comparatifs/comparatif-edr-souverain-europeen-nis2).
+
+### Profil 2 : PME et ETI souhaitant sécuriser 100 % des collaborateurs (10 à 500 utilisateurs)
+* **Recommandation :** Proton Pass Business
+* **Justification :** Déployable en quelques heures sans infrastructure serveur, Proton Pass Business chiffre de bout en bout non seulement les mots de passe et codes 2FA TOTP, mais aussi les URLs et intitulés de fiches. Il permet de satisfaire immédiatement aux obligations de cyber-hygiène (Article 21.2.g) et d'authentification multifacteur (Article 21.2.j) tout en préparant la gouvernance documentaire suivie dans notre [comparatif GRC Tenacy vs Vanta](/comparatifs/tenacy-vs-vanta-grc-nis2).
+
+## Tableau Comparatif Technique & Réglementaire
+
+| Critère d'évaluation | Wallix PAM4ALL | Proton Pass Business |
+| :--- | :--- | :--- |
+| **Prix de départ indicatif** | Sur devis (selon nombre d'admins ou cibles) | 1,99 € / utilisateur / mois (palier Essentials) |
+| **Modèle de facturation** | Sur devis entreprise (CUSTOM_QUOTE) | Par utilisateur (PER_USER) |
+| **Engagement minimal** | 10 licences / cibles | 1 utilisateur |
+| **Pays de juridiction** | France (Union européenne) | Suisse (Hors juridiction US) |
+| **Souveraineté & Cloud Act** | Oui (100 % français, exempt Cloud Act) | Oui (Droit suisse LPD, exempt Cloud Act) |
+| **Certifications détenues** | Certification ANSSI CSPN, ISO/IEC 27001, BSI | ISO/IEC 27001, SOC 2 Type II, Audit Cure53 |
+| **Couverture NIS2 Article 21** | 21.2.d, 21.2.i, 21.2.j | 21.2.g, 21.2.h, 21.2.j |
+| **Périmètre fonctionnel** | Bastion PAM, Session Recording, Rotation AD | Coffre-fort EPM Zero-Knowledge, 2FA, Passkeys |
+| **Contrôle des sous-traitants** | Accès sans VPN Just-in-Time avec audit vidéo | Partage sécurisé de coffres-forts chiffrés |
+
+## Analyse Technique Granulaire des Architectures
+
+### Architecture Bastion (Proxy d'Isolation) vs Chiffrement Client Zero-Knowledge
+Wallix PAM4ALL s'insère dans l'architecture réseau comme un point de passage obligatoire (Jump Host / Bastion) entre l'administrateur et la cible (serveur Windows, Linux, base de données ou équipement réseau). L'opérateur s'authentifie sur le portail Wallix avec MFA, puis le bastion ouvre la session distante en injectant le mot de passe administrateur stocké dans son coffre matériellement isolé. Le mot de passe est automatiquement régénéré dès la fermeture de la session. Pour chiffrer le transport amont des collaborateurs nomades, cette brique s'articule avec les solutions étudiées dans notre [comparatif ZTNA NordLayer vs Tailscale](/comparatifs/nordlayer-vs-tailscale-zero-trust-pme).
+
+Proton Pass Business repose sur une cryptographie asymétrique PGP et Argon2 exécutée exclusivement sur le terminal de l'utilisateur (navigateur, poste ou mobile). Les serveurs suisses de Proton ne détiennent aucune clé de déchiffrement. Contrairement à plusieurs gestionnaires concurrents qui laissent les noms de domaines (URLs) en clair dans les métadonnées serveur, Proton chiffre l'intégralité de l'objet JSON avant transmission.
+
+### Traçabilité Forensique et Conformité Supply Chain (Article 21.2.d)
+Lors d'un contrôle réglementaire consécutif à un incident, l'autorité nationale (ANSSI ou CCB) exige la preuve des accès effectués par les prestataires externes :
+* **Wallix :** Fournit un journal d'audit horodaté doublé d'un enregistrement vidéo indexé par reconnaissance optique de caractères (OCR), permettant de rechercher instantanément quelle commande shell a été saisie par un télémainteneur.
+* **Proton Pass :** Fournit aux administrateurs un journal d'activité des partages de coffres, l'application forcée du 2FA et le moniteur Proton Sentinel qui détecte les fuites d'identifiants sur le Dark Web.
+
+## Analyse des Coûts Réels et Frais Cachés
+
+1. **Dimensionnement d'un projet Wallix PAM4ALL :** Le coût d'acquisition dépend du mode de déploiement (Appliance virtuelle sur site ou SaaS managé) et du périmètre fonctionnel (Bastion seul ou suite complète incluant l'élévation de privilèges sur les postes PEDM). Une prestation d'intégration initiale de 3 à 10 jours-homme est généralement à prévoir pour raccorder l'Active Directory et qualifier les flux.
+2. **Écart entre Proton Pass Essentials et Professional :** Le tarif d'appel à 1,99 € / utilisateur / mois couvre le coffre-fort et le partage sécurisé. Toutefois, pour une PME ou ETI souhaitant imposer l'authentification unique SSO (SAML avec Entra ID ou Okta) et le provisionnement automatique SCIM, le palier Professional à 4,49 € / utilisateur / mois devient indispensable.
+3. **Protection du poste de travail :** Un coffre-fort ou un bastion ne protège pas contre un enregistreur de frappe (Keylogger) exécuté en mémoire sur un poste infecté ; assurez-vous de coupler votre gestion d'identités avec un agent évalué dans notre [duel Bitdefender GravityZone vs SentinelOne](/comparatifs/bitdefender-gravityzone-vs-sentinelone-nis2).
+
+### Preuves Visuelles des Portails et Grilles Tarifaires Officielles
+
+#### Portail Officiel Wallix PAM4ALL (Sur Devis)
+![Preuve tarifaire Wallix PAM4ALL](/proofs/wallix-pam4all-pricing.webp)
+
+#### Grille Tarifaire Officielle Proton Pass Business
+![Preuve tarifaire Proton Pass Business](/proofs/proton-pass-business-pricing.webp)

@@ -1,0 +1,35 @@
+{
+  "name": "Veeam Data Platform",
+  "slug": "veeam-data-platform",
+  "category": "BACKUP_DR",
+  "vendorCountry": "États-Unis",
+  "isEuropeanSovereign": false,
+  "startingPriceMonthlyEur": 12.5,
+  "pricingModel": "PER_ENDPOINT",
+  "minimumSeats": 10,
+  "nis2ArticlesCovered": [
+    "Article 21.2.c (Continuité des activités, gestion des sauvegardes et reprise après sinistre PRA/PCA)",
+    "Article 21.2.b (Traitement des incidents et restauration intègre après rançongiciel)",
+    "Article 21.2.f (Tests automatisés d'évaluation de l'efficacité des plans de continuité)"
+  ],
+  "certifications": [
+    "ISO/IEC 27001",
+    "SOC 2 Type II",
+    "Common Criteria EAL2+"
+  ],
+  "pros": [
+    "Standard mondial de sauvegarde immuable (Hardened Linux Repository et Object Lock S3) empêchant toute altération par un rançongiciel",
+    "Technologie SureBackup permettant d'automatiser et de documenter les tests de restauration en bac à sable isolé pour les audits NIS2",
+    "Licence universelle portable (VUL) couvrant indifféremment machines virtuelles VMware/Hyper-V, serveurs physiques et instances Cloud",
+    "Détection d'anomalies et d'indicateurs de compromission (IoC) directement lors des flux de sauvegarde (Inline Malware Detection)"
+  ],
+  "cons": [
+    "Siège social transféré aux États-Unis (Ohio/Washington), soumettant l'éditeur à la juridiction américaine",
+    "Commercialisation par packs de 10 licences universelles (VUL) avec un coût unitaire élevé pour de simples postes de travail bureautiques"
+  ],
+  "officialUrl": "https://www.veeam.com/fr/products/veeam-data-platform.html",
+  "affiliateUrl": "https://www.veeam.com/fr/products/veeam-data-platform.html",
+  "pricingScreenshotPath": "/proofs/veeam-data-platform-pricing.webp",
+  "lastVerifiedDate": "2026-10-24",
+  "hasActiveAffiliateLink": false
+}

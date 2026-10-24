@@ -1,0 +1,35 @@
+{
+  "name": "Greenbone Enterprise (OpenVAS)",
+  "slug": "greenbone-enterprise",
+  "category": "VULN_PENTEST",
+  "vendorCountry": "Allemagne",
+  "isEuropeanSovereign": true,
+  "startingPriceMonthlyEur": 0,
+  "pricingModel": "CUSTOM_QUOTE",
+  "minimumSeats": 25,
+  "nis2ArticlesCovered": [
+    "Article 21.2.e (Sécurité des réseaux et systèmes d'information, gestion et remédiation des vulnérabilités)",
+    "Article 21.2.f (Procédures d'audit et d'évaluation technique de la sécurité)",
+    "Article 21.2.d (Vérification de conformité des infrastructures critiques et industrielles)"
+  ],
+  "certifications": [
+    "ISO/IEC 27001",
+    "ISO 9001",
+    "Référentiel BSI IT-Grundschutz (Allemagne)"
+  ],
+  "pros": [
+    "Éditeur souverain allemand (Osnabrück) développé en partenariat historique avec l'agence fédérale BSI, 100 % exempt du Cloud Act",
+    "Appliance virtuelle ou matérielle déployable intégralement sur site (On-Premises / Air-Gap) sans aucune fuite de topologie vers le cloud",
+    "Flux Greenbone Enterprise Feed couvrant plus de 180 000 tests de vulnérabilités (NVT), politiques d'audit CIS et IT-Grundschutz",
+    "Capacité de scan illimitée en interne sur les plages IP locales une fois l'appliance souscrite (pas de surcoût par adresse IP interne)"
+  ],
+  "cons": [
+    "Tarification sous forme d'abonnement annuel au flux Enterprise Feed sur devis (ticket d'entrée destiné aux PME structurées et ETI)",
+    "Interface technique dense exigeant un administrateur système ou réseau qualifié pour planifier et interpréter les scans authentifiés"
+  ],
+  "officialUrl": "https://www.greenbone.net/en/products/",
+  "affiliateUrl": "https://www.greenbone.net/en/products/",
+  "pricingScreenshotPath": "/proofs/greenbone-enterprise-pricing.webp",
+  "lastVerifiedDate": "2026-10-24",
+  "hasActiveAffiliateLink": false
+}

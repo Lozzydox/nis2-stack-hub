@@ -1,0 +1,35 @@
+{
+  "name": "Tenacy",
+  "slug": "tenacy",
+  "category": "GRC_NIS2",
+  "vendorCountry": "France",
+  "isEuropeanSovereign": true,
+  "startingPriceMonthlyEur": 0,
+  "pricingModel": "CUSTOM_QUOTE",
+  "minimumSeats": 1,
+  "nis2ArticlesCovered": [
+    "Article 21.2.a (Politiques relatives à l'analyse des risques et à la sécurité des systèmes d'information)",
+    "Article 21.2.d (Sécurité de la chaîne d'approvisionnement et évaluation des tiers)",
+    "Article 21.2.f (Politiques et procédures d'évaluation de l'efficacité des mesures de gestion des risques)"
+  ],
+  "certifications": [
+    "Hébergement SecNumCloud (ANSSI)",
+    "ISO/IEC 27001",
+    "Référencement UGAP"
+  ],
+  "pros": [
+    "Plateforme GRC 100% française hébergée sur infrastructure qualifiée SecNumCloud par l'ANSSI, exempte du Cloud Act",
+    "Catalogue natif des référentiels européens et nationaux : NIS2, DORA, ISO 27001, EBIOS RM, RGS, HDS et CCB CyberFundamentals",
+    "Tableaux de bord COMEX automatisés et suivi financier du ROI des plans d'action cyber pour le RSSI",
+    "Connecteurs techniques permettant de consolider les indicateurs de conformité depuis les outils de sécurité existants"
+  ],
+  "cons": [
+    "Tarification annuelle uniquement sur devis selon la complexité organisationnelle (non destiné aux TPE)",
+    "Orientation gouvernance et pilotage RSSI demandant un paramétrage initial plus structuré qu'un simple scanner de conformité"
+  ],
+  "officialUrl": "https://www.tenacy.io/fr/",
+  "affiliateUrl": "https://www.tenacy.io/fr/",
+  "pricingScreenshotPath": "/proofs/tenacy-pricing.webp",
+  "lastVerifiedDate": "2026-10-24",
+  "hasActiveAffiliateLink": false
+}

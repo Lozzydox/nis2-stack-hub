@@ -1,0 +1,35 @@
+{
+  "name": "Tailscale",
+  "slug": "tailscale",
+  "category": "SASE_VPN",
+  "vendorCountry": "Canada / États-Unis",
+  "isEuropeanSovereign": false,
+  "startingPriceMonthlyEur": 5.5,
+  "pricingModel": "PER_USER",
+  "minimumSeats": 1,
+  "nis2ArticlesCovered": [
+    "Article 21.2.h (Politiques et procédures relatives à l'utilisation de la cryptographie et du chiffrement)",
+    "Article 21.2.i (Contrôle d'accès granulaire ACL et gestion des actifs réseau)",
+    "Article 21.2.j (Authentification multifacteur et communications chiffrées de bout en bout)"
+  ],
+  "certifications": [
+    "SOC 2 Type II",
+    "Conformité RGPD",
+    "HIPAA"
+  ],
+  "pros": [
+    "Architecture Mesh peer-to-peer basée sur WireGuard : le trafic de données chiffré ne transite pas par un concentrateur central",
+    "Gestion des politiques d'accès réseau en Policy-as-Code (GitOps ACLs) idéale pour les équipes DevOps et administrateurs système",
+    "Traversée NAT automatique (NAT Traversal) sans ouverture de ports sur les pare-feux d'entreprise",
+    "Aucun minimum de licences imposé et facturation uniquement aux utilisateurs réellement actifs dans le mois"
+  ],
+  "cons": [
+    "Plan de contrôle (Control Plane de coordination des clés) hébergé par une entité nord-américaine soumise aux juridictions hors UE",
+    "Absence de filtrage DNS/Web de type Secure Web Gateway (SWG) nativement intégré contrairement aux suites SASE complètes"
+  ],
+  "officialUrl": "https://tailscale.com/pricing",
+  "affiliateUrl": "https://tailscale.com/pricing",
+  "pricingScreenshotPath": "/proofs/tailscale-pricing.webp",
+  "lastVerifiedDate": "2026-10-24",
+  "hasActiveAffiliateLink": false
+}

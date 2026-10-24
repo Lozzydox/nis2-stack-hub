@@ -1,0 +1,35 @@
+{
+  "name": "Wallix PAM4ALL",
+  "slug": "wallix-pam4all",
+  "category": "IAM_PAM",
+  "vendorCountry": "France",
+  "isEuropeanSovereign": true,
+  "startingPriceMonthlyEur": 0,
+  "pricingModel": "CUSTOM_QUOTE",
+  "minimumSeats": 10,
+  "nis2ArticlesCovered": [
+    "Article 21.2.d (Sécurité de la chaîne d'approvisionnement et contrôle des accès prestataires tiers)",
+    "Article 21.2.i (Politiques de contrôle d'accès et gestion des comptes à privilèges)",
+    "Article 21.2.j (Authentification multifacteur et traçabilité des sessions d'administration)"
+  ],
+  "certifications": [
+    "Certification ANSSI CSPN",
+    "ISO/IEC 27001",
+    "BSI (Allemagne)"
+  ],
+  "pros": [
+    "Éditeur français coté sur Euronext disposant de la certification ANSSI CSPN sur son Bastion et son gestionnaire d'accès",
+    "Enregistrement vidéo intégral et inaltérable des sessions RDP, SSH et Web des prestataires externes (conformité Article 21.2.d)",
+    "Coffre-fort de mots de passe à privilèges avec rotation automatique des secrets sur Active Directory et serveurs critiques",
+    "Module Remote Access sans VPN permettant d'accorder des accès temporaires Just-in-Time aux sous-traitants industriels (OT/IT)"
+  ],
+  "cons": [
+    "Tarification exclusivement sur devis via intégrateurs selon le nombre de comptes administrateurs ou de cibles gérées",
+    "Mise en œuvre initiale d'une architecture de bastion demandant une cartographie préalable des comptes à privilèges"
+  ],
+  "officialUrl": "https://www.wallix.com/fr/",
+  "affiliateUrl": "https://www.wallix.com/fr/",
+  "pricingScreenshotPath": "/proofs/wallix-pam4all-pricing.webp",
+  "lastVerifiedDate": "2026-10-24",
+  "hasActiveAffiliateLink": false
+}

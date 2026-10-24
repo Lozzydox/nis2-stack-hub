@@ -1,0 +1,35 @@
+{
+  "name": "Proton Pass Business",
+  "slug": "proton-pass-business",
+  "category": "IAM_PAM",
+  "vendorCountry": "Suisse",
+  "isEuropeanSovereign": true,
+  "startingPriceMonthlyEur": 1.99,
+  "pricingModel": "PER_USER",
+  "minimumSeats": 1,
+  "nis2ArticlesCovered": [
+    "Article 21.2.g (Pratiques de base en matière de cyber-hygiène et élimination des mots de passe faibles)",
+    "Article 21.2.h (Utilisation de la cryptographie et chiffrement de bout en bout Zero-Knowledge)",
+    "Article 21.2.j (Authentification multifacteur 2FA/TOTP et prise en charge des clés d'accès Passkeys)"
+  ],
+  "certifications": [
+    "ISO/IEC 27001",
+    "SOC 2 Type II",
+    "Loi Fédérale Suisse LPD & RGPD"
+  ],
+  "pros": [
+    "Juridiction suisse stricte hors juridiction américaine (exempt du US Cloud Act) avec code source 100% Open Source audité par Cure53",
+    "Chiffrement de bout en bout intégral incluant les métadonnées (URLs, noms d'utilisateur et notes chiffrés localement)",
+    "Surveillance continue Proton Sentinel et alertes d'exposition sur le Dark Web pour les domaines d'entreprise",
+    "Tarif d'entrée ultra-compétitif dès 1,99 € / utilisateur / mois (palier Essentials) ou 4,49 € / mois (palier Professional) sans minimum de postes"
+  ],
+  "cons": [
+    "Conçu pour la gestion des identifiants collaborateurs (EPM), il ne remplace pas un bastion PAM d'enregistrement de sessions RDP/SSH",
+    "Les fonctionnalités d'authentification unique SSO (SAML) et de provisionnement SCIM requièrent le palier supérieur Professional"
+  ],
+  "officialUrl": "https://proton.me/fr/business/pass",
+  "affiliateUrl": "https://proton.me/fr/business/pass",
+  "pricingScreenshotPath": "/proofs/proton-pass-business-pricing.webp",
+  "lastVerifiedDate": "2026-10-24",
+  "hasActiveAffiliateLink": false
+}

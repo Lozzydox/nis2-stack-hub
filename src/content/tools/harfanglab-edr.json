@@ -1,0 +1,37 @@
+{
+  "name": "HarfangLab EDR",
+  "slug": "harfanglab-edr",
+  "category": "EDR_XDR",
+  "vendorCountry": "France",
+  "isEuropeanSovereign": true,
+  "startingPriceMonthlyEur": 0,
+  "pricingModel": "CUSTOM_QUOTE",
+  "minimumSeats": 50,
+  "nis2ArticlesCovered": [
+    "Article 21.2.a (Politiques relatives à l'analyse des risques et à la sécurité)",
+    "Article 21.2.b (Traitement des incidents de sécurité)",
+    "Article 21.2.d (Sécurité de la chaîne d'approvisionnement)",
+    "Article 21.2.e (Sécurité de l'acquisition, du développement et de la maintenance)"
+  ],
+  "certifications": [
+    "Qualification ANSSI",
+    "Certification ANSSI CSPN",
+    "BSI BSZ (Allemagne)",
+    "ISO/IEC 27001:2022"
+  ],
+  "pros": [
+    "Seul EDR français qualifié par l'ANSSI et certifié CSPN, garantissant une souveraineté européenne absolue",
+    "Déploiement hybride flexible : Cloud souverain SecNumCloud, On-Premises ou réseau totalement déconnecté (Air-Gap)",
+    "Agent ultra-léger codé en Rust offrant une transparence totale sur les règles de détection Sigma et YARA (pas de boîte noire)",
+    "Intégration native avec l'écosystème cyber européen (Sekoia.io, Pradeo, Airbus Protect) pour les OIV et Entités Essentielles NIS2"
+  ],
+  "cons": [
+    "Tarification exclusivement sur devis via réseau d'intégrateurs ou MSSP, peu adaptée aux TPE de moins de 50 postes",
+    "Nécessite une équipe SOC interne ou un partenaire MDR managé pour exploiter toute la richesse des règles YARA/Sigma"
+  ],
+  "officialUrl": "https://harfanglab.io/fr/produits/edr/",
+  "affiliateUrl": "https://harfanglab.io/fr/produits/edr/",
+  "pricingScreenshotPath": "/proofs/harfanglab-edr-pricing.webp",
+  "lastVerifiedDate": "2026-10-24",
+  "hasActiveAffiliateLink": false
+}

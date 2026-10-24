@@ -1,0 +1,168 @@
+{
+    "toolsToScrape": [
+        {
+            "id": "bitdefender-gravityzone",
+            "name": "Bitdefender GravityZone",
+            "category": "EDR_XDR",
+            "officialPricingUrl": "https://www.bitdefender.fr/business/smb-products/business-security.html",
+            "status": "DONE"
+        },
+        {
+            "id": "sentinelone-singularity",
+            "name": "SentinelOne Singularity",
+            "category": "EDR_XDR",
+            "officialPricingUrl": "https://www.sentinelone.com/platform-packages/",
+            "status": "DONE"
+        },
+        {
+            "id": "harfanglab-edr",
+            "name": "HarfangLab EDR",
+            "category": "EDR_XDR",
+            "officialPricingUrl": "https://harfanglab.io/fr/produits/edr/",
+            "status": "DONE"
+        },
+        {
+            "id": "nordlayer",
+            "name": "NordLayer",
+            "category": "SASE_VPN",
+            "officialPricingUrl": "https://nordlayer.com/fr/pricing/",
+            "status": "DONE"
+        },
+        {
+            "id": "tailscale",
+            "name": "Tailscale",
+            "category": "SASE_VPN",
+            "officialPricingUrl": "https://tailscale.com/pricing",
+            "status": "DONE"
+        },
+        {
+            "id": "tenacy",
+            "name": "Tenacy",
+            "category": "GRC_NIS2",
+            "officialPricingUrl": "https://www.tenacy.io/fr/",
+            "status": "DONE"
+        },
+        {
+            "id": "vanta",
+            "name": "Vanta",
+            "category": "GRC_NIS2",
+            "officialPricingUrl": "https://www.vanta.com/pricing",
+            "status": "DONE"
+        },
+        {
+            "id": "wallix-pam4all",
+            "name": "Wallix PAM4ALL",
+            "category": "IAM_PAM",
+            "officialPricingUrl": "https://www.wallix.com/fr/",
+            "status": "DONE"
+        },
+        {
+            "id": "proton-pass-business",
+            "name": "Proton Pass Business",
+            "category": "IAM_PAM",
+            "officialPricingUrl": "https://proton.me/fr/business/pass",
+            "status": "DONE"
+        },
+        {
+            "id": "veeam-data-platform",
+            "name": "Veeam Data Platform",
+            "category": "BACKUP_DR",
+            "officialPricingUrl": "https://www.veeam.com/fr/products/veeam-data-platform.html",
+            "status": "DONE"
+        },
+        {
+            "id": "acronis-cyber-protect",
+            "name": "Acronis Cyber Protect Cloud",
+            "category": "BACKUP_DR",
+            "officialPricingUrl": "https://www.acronis.com/fr-fr/products/cloud/cyber-protect/",
+            "status": "DONE"
+        },
+        {
+            "id": "intruder-scanner",
+            "name": "Intruder Vulnerability Scanner",
+            "category": "VULN_PENTEST",
+            "officialPricingUrl": "https://www.intruder.io/pricing",
+            "status": "DONE"
+        },
+        {
+            "id": "greenbone-enterprise",
+            "name": "Greenbone Enterprise (OpenVAS)",
+            "category": "VULN_PENTEST",
+            "officialPricingUrl": "https://www.greenbone.net/en/products/",
+            "status": "DONE"
+        }
+    ],
+    "articlesToGenerate": [
+        {
+            "slug": "bitdefender-gravityzone-vs-sentinelone-nis2",
+            "template": "DUEL",
+            "tools": [
+                "bitdefender-gravityzone",
+                "sentinelone-singularity"
+            ],
+            "targetKeyword": "Bitdefender GravityZone vs SentinelOne PME NIS2",
+            "status": "PUBLISHED_LOCAL"
+        },
+        {
+            "slug": "nordlayer-vs-tailscale-zero-trust-pme",
+            "template": "DUEL",
+            "tools": [
+                "nordlayer",
+                "tailscale"
+            ],
+            "targetKeyword": "NordLayer vs Tailscale VPN Zero Trust PME",
+            "status": "PUBLISHED_LOCAL"
+        },
+        {
+            "slug": "comparatif-edr-souverain-europeen-nis2",
+            "template": "PILLAR",
+            "tools": [
+                "harfanglab-edr",
+                "bitdefender-gravityzone",
+                "sentinelone-singularity"
+            ],
+            "targetKeyword": "Meilleur EDR conformité NIS2 PME",
+            "status": "PUBLISHED_LOCAL"
+        },
+        {
+            "slug": "tenacy-vs-vanta-grc-nis2",
+            "template": "DUEL",
+            "tools": [
+                "tenacy",
+                "vanta"
+            ],
+            "targetKeyword": "Tenacy vs Vanta logiciel GRC conformité NIS2",
+            "status": "PUBLISHED_LOCAL"
+        },
+        {
+            "slug": "wallix-pam4all-vs-proton-pass-iam-nis2",
+            "template": "DUEL",
+            "tools": [
+                "wallix-pam4all",
+                "proton-pass-business"
+            ],
+            "targetKeyword": "Wallix PAM4ALL vs Proton Pass Business IAM PAM NIS2",
+            "status": "PUBLISHED_LOCAL"
+        },
+        {
+            "slug": "veeam-vs-acronis-sauvegarde-immuable-nis2",
+            "template": "DUEL",
+            "tools": [
+                "acronis-cyber-protect",
+                "veeam-data-platform"
+            ],
+            "targetKeyword": "Veeam vs Acronis sauvegarde immuable PRA NIS2",
+            "status": "PUBLISHED_LOCAL"
+        },
+        {
+            "slug": "scanner-vulnerabilites-pentest-continu-nis2",
+            "template": "DUEL",
+            "tools": [
+                "intruder-scanner",
+                "greenbone-enterprise"
+            ],
+            "targetKeyword": "Intruder vs Greenbone OpenVAS scanner vulnérabilités NIS2",
+            "status": "PUBLISHED_LOCAL"
+        }
+    ]
+}
