@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Politique de Confidentialité & Protection des Données (RGPD) | NIS2 // STACK HUB"
+  description="Politique de confidentialité conforme au RGPD : traitement des adresses email professionnelles, absence de cession sans consentement explicite et exercice des droits."
+>
+  <div class="bg-white border-b border-zinc-200 py-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex items-center gap-2 text-xs text-zinc-500 mb-4">
+        <a href="/" class="hover:text-zinc-950 transition-colors">Accueil</a>
+        <span>/</span>
+        <span class="text-zinc-800">Politique de Confidentialité (RGPD)</span>
+      </nav>
+      <span class="px-2.5 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-xs font-medium inline-block mb-3">
+        CONFORMITÉ RÈGLEMENT (UE) 2016/679 (RGPD)
+      </span>
+      <h1 class="text-2xl sm:text-4xl font-display font-bold tracking-tight text-zinc-950">
+        Politique de Confidentialité et Protection des Données Personnelles
+      </h1>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+    <section class="bg-white border border-zinc-200 rounded-md p-6 sm:p-8 space-y-4">
+      <h2 class="text-lg font-display font-bold text-zinc-950 border-b border-zinc-200 pb-3">
+        1. Principes Généraux et Minimisation des Données
+      </h2>
+      <p class="text-sm text-zinc-700 leading-relaxed">
+        <strong>NIS2 // STACK HUB</strong> applique un principe strict de minimisation des données conformément à l'Article 5 du Règlement Général sur la Protection des Données (RGPD — Règlement UE 2016/679). La consultation de l'ensemble des comparatifs, du calculateur de TCO et des fiches techniques s'effectue librement, sans traceur publicitaire tiers ni création de compte obligatoire.
+      </p>
+    </section>
+
+    <section class="bg-white border border-zinc-200 rounded-md p-6 sm:p-8 space-y-4">
+      <h2 class="text-lg font-display font-bold text-zinc-950 border-b border-zinc-200 pb-3">
+        2. Données Collectées via les Formulaires et Finalités Distinctionnelles
+      </h2>
+      <p class="text-sm text-zinc-700 leading-relaxed">
+        Lorsqu'un utilisateur utilise le formulaire de téléchargement de la Matrice PDF ou de demande de chiffrage B2B, seules les informations strictement nécessaires sont collectées :
+      </p>
+      <ul class="list-disc pl-5 space-y-2 text-sm text-zinc-700 leading-relaxed">
+        <li><strong>Adresse email professionnelle</strong></li>
+        <li><strong>Solution logicielle ou silo Article 21 évalué</strong></li>
+        <li><strong>Tranche de volume du parc informatique (nombre de postes)</strong></li>
+      </ul>
+      <div class="bg-zinc-50 border border-zinc-200 rounded p-4 space-y-2 text-xs text-zinc-700">
+        <p class="font-display font-bold text-zinc-950 uppercase">
+          Séparation stricte des consentements (Article 6.1.a du RGPD) :
+        </p>
+        <p>
+          <strong>1. Téléchargement de la Matrice PDF (Case 1 obligatoire) :</strong> Votre adresse email est traitée uniquement pour vous délivrer le livrable PDF demandé et assurer le suivi documentaire lié à cette matrice.
+        </p>
+        <p>
+          <strong>2. Mise en relation B2B (Case 2 optionnelle et non pré-cochée) :</strong> <strong>Aucune donnée n'est transmise, louée ou cédée à un éditeur ou intégrateur partenaire</strong> si vous n'avez pas explicitement coché la seconde case facultative demandant un chiffrage personnalisé.
+        </p>
+      </div>
+    </section>
+
+    <section class="bg-white border border-zinc-200 rounded-md p-6 sm:p-8 space-y-4">
+      <h2 class="text-lg font-display font-bold text-zinc-950 border-b border-zinc-200 pb-3">
+        3. Architecture de Sécurité Côté Serveur et Durée de Conservation
+      </h2>
+      <p class="text-sm text-zinc-700 leading-relaxed">
+        Les soumissions de formulaires transitent exclusivement en HTTPS (TLS 1.3) vers notre fonction serveur sécurisée hébergée sur Cloudflare (`POST /api/lead`), équipée d'un filtrage anti-automatisation (honeypot) et d'une validation stricte des schémas. Aucune clé d'API ni URL de webhook interne n'est exposée dans le code client.
+      </p>
+      <p class="text-sm text-zinc-700 leading-relaxed">
+        Les données de contact professionnelles sont conservées pendant une durée maximale de <strong>12 mois</strong> à compter du dernier contact actif, ou supprimées immédiatement sur simple demande.
+      </p>
+    </section>
+
+    <section class="bg-white border border-zinc-200 rounded-md p-6 sm:p-8 space-y-4">
+      <h2 class="text-lg font-display font-bold text-zinc-950 border-b border-zinc-200 pb-3">
+        4. Exercice de vos Droits (Accès, Rectification, Effacement, Opposition)
+      </h2>
+      <p class="text-sm text-zinc-700 leading-relaxed">
+        Conformément aux Articles 15 à 22 du RGPD, vous disposez à tout moment d'un droit d'accès, de rectification, de portabilité, d'effacement (« droit à l'oubli ») et de retrait de votre consentement. Pour exercer ces droits sans formalité complexe, envoyez votre demande à :
+      </p>
+      <p class="font-mono text-sm font-semibold text-zinc-950 bg-zinc-50 border border-zinc-200 rounded px-4 py-2.5 inline-block">
+        privacy@nis2-stack-hub.com
+      </p>
+      <p class="text-xs text-zinc-500 leading-relaxed">
+        Toute demande de suppression est traitée sous un délai maximal de 72 heures ouvrées. Vous disposez également du droit d'introduire une réclamation auprès de l'Autorité de protection des données (APD en Belgique, CNIL en France ou PFPDT en Suisse).
+      </p>
+    </section>
+  </div>
+</BaseLayout>

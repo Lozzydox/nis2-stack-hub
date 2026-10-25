@@ -31,5 +31,6 @@
   "affiliateUrl": "https://tailscale.com/pricing",
   "pricingScreenshotPath": "/proofs/tailscale-pricing.webp",
   "lastVerifiedDate": "2026-10-24",
-  "hasActiveAffiliateLink": false
+  "hasActiveAffiliateLink": false,
+  "jurisdictionStatus": "US_CLOUD_ACT"
 }

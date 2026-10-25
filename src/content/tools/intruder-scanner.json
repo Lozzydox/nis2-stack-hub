@@ -3,7 +3,7 @@
   "slug": "intruder-scanner",
   "category": "VULN_PENTEST",
   "vendorCountry": "Royaume-Uni (Adéquation RGPD UE)",
-  "isEuropeanSovereign": true,
+  "isEuropeanSovereign": false,
   "startingPriceMonthlyEur": 9.5,
   "pricingModel": "PER_ENDPOINT",
   "minimumSeats": 10,
@@ -31,5 +31,6 @@
   "affiliateUrl": "https://www.intruder.io/pricing",
   "pricingScreenshotPath": "/proofs/intruder-scanner-pricing.webp",
   "lastVerifiedDate": "2026-10-24",
-  "hasActiveAffiliateLink": false
+  "hasActiveAffiliateLink": false,
+  "jurisdictionStatus": "ADEQUACY_RGPD_NON_EU"
 }

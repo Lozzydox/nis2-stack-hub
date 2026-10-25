@@ -61,15 +61,23 @@ const softwareSchemas = comparedTools.map((tool) => ({
 const jsonLdPayload = [faqSchema, ...softwareSchemas];
 
 const recommendedTool =
-  comparedTools.find((t) => t.isEuropeanSovereign) || comparedTools[0];
+  comparedTools.find((t) => t.jurisdictionStatus === 'EU_MEMBER') ||
+  comparedTools.find((t) => t.jurisdictionStatus === 'ADEQUACY_RGPD_NON_EU') ||
+  comparedTools[0];
 
-const defaultWebhookUrl =
-  import.meta.env.PUBLIC_LEAD_WEBHOOK_URL ||
-  'https://discord.com/api/webhooks/1563575615163211947/mpNJSrQ9abu-3HvippJv6uuPsaRWNUuvXiugLnXBWUO-JiuzRzVVNhvkeDIbukHNwLGT';
+function formatJurisdictionText(tool: ToolItem): string {
+  if (tool.jurisdictionStatus === 'EU_MEMBER') {
+    return `Juridiction UE (${tool.vendorCountry}) · Hors Cloud Act direct`;
+  }
+  if (tool.jurisdictionStatus === 'ADEQUACY_RGPD_NON_EU') {
+    return `Hors UE · Adéquation RGPD (${tool.vendorCountry})`;
+  }
+  return `Juridiction US · Soumis Cloud Act`;
+}
 ---
 
 <BaseLayout
-  title={`${comparison.data.title} | Audit & TCO NIS2`}
+  title={`${comparison.data.title} | Analyse & TCO NIS2`}
   description={comparison.data.metaDescription}
   jsonLd={jsonLdPayload}
 >
@@ -92,13 +100,13 @@ const defaultWebhookUrl =
           {comparison.data.category}
         </span>
         <span class="px-2.5 py-0.5 rounded bg-white text-zinc-600 border border-zinc-200 text-xs">
-          Audit mis à jour le {comparison.data.updatedDate}
+          Relevé mis à jour le {comparison.data.updatedDate}
         </span>
         <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-medium">
           <svg class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          Preuves tarifaires vérifiées
+          Relevés tarifaires publics indicatifs
         </span>
       </div>
 
@@ -109,7 +117,7 @@ const defaultWebhookUrl =
       <div class="bg-white border border-zinc-200 rounded-md overflow-hidden shadow-[0_1px_3px_rgba(9,9,11,0.03)]">
         <div class="bg-zinc-100/80 border-b border-zinc-200 px-5 py-3 flex flex-wrap items-center justify-between gap-2">
           <span class="text-xs font-display font-semibold uppercase tracking-wider text-zinc-800">
-            Synthèse d'Audit Exécutive (BLUF — Bottom Line Up Front)
+            Synthèse d'Analyse Exécutive (BLUF — Bottom Line Up Front)
           </span>
           <span class="text-xs text-zinc-500">
             Périmètre : DSI, RSSI, PME et ETI (20 à 500 postes)
@@ -125,7 +133,7 @@ const defaultWebhookUrl =
               <strong class="font-mono text-zinc-900">{comparison.data.nis2ComplianceFocus}</strong>
             </div>
             <div>
-              <span class="text-zinc-500 block mb-1.5">Solutions auditées :</span>
+              <span class="text-zinc-500 block mb-1.5">Solutions évaluées :</span>
               <div class="flex flex-wrap items-center gap-2">
                 {comparedTools.map((t) => (
                   <div class="inline-flex items-center gap-2 pr-2.5 pl-1 py-1 bg-zinc-50 border border-zinc-200 rounded">
@@ -164,17 +172,17 @@ const defaultWebhookUrl =
                 <svg class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                Partenaire Recommandé NIS2
+                Solution Mise en Avant NIS2
               </span>
               <span class="text-xs text-zinc-500">
-                Juridiction : {recommendedTool.vendorCountry} ({recommendedTool.isEuropeanSovereign ? 'Exempt Cloud Act' : 'Standard International'})
+                {formatJurisdictionText(recommendedTool)}
               </span>
             </div>
             <p class="text-base font-display font-bold text-zinc-950">
               {recommendedTool.name} — Déploiement PME et ETI dès <span class="font-mono">{recommendedTool.minimumSeats}</span> poste(s)
             </p>
             <p class="text-xs text-zinc-600 mt-0.5">
-              Certifications validées : {recommendedTool.certifications.join(' · ')}
+              Certifications : {recommendedTool.certifications.join(' · ')}
             </p>
           </div>
         </div>
@@ -198,7 +206,7 @@ const defaultWebhookUrl =
       <div class="bg-zinc-100/80 border-b border-zinc-200 px-6 py-4 flex flex-wrap items-center justify-between gap-2">
         <div>
           <span class="text-xs uppercase tracking-wider text-zinc-500 font-semibold block">
-            Audit de Souveraineté et Points Critiques
+            Qualification Juridictionnelle et Points Critiques
           </span>
           <h2 class="text-lg font-display font-bold text-zinc-950 mt-0.5">
             Fiches Synthétiques des Solutions Évaluées
@@ -213,7 +221,7 @@ const defaultWebhookUrl =
         {comparedTools.map((tool) => (
           <div class="border border-zinc-200 rounded-md p-5 bg-zinc-50/40 flex flex-col justify-between hover:-translate-y-0.5 hover:shadow-sm transition-all duration-200">
             <div>
-              <div class="flex items-center justify-between gap-2 mb-3">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
                 <div class="flex items-center gap-2.5">
                   <div class="w-9 h-9 rounded bg-white border border-zinc-200 p-1.5 shrink-0 flex items-center justify-center">
                     <img
@@ -225,13 +233,19 @@ const defaultWebhookUrl =
                   </div>
                   <h3 class="text-base font-display font-bold text-zinc-950">{tool.name}</h3>
                 </div>
-                {tool.isEuropeanSovereign ? (
+                {tool.jurisdictionStatus === 'EU_MEMBER' && (
                   <span class="px-2.5 py-0.5 rounded text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200">
-                    Souverain UE ({tool.vendorCountry})
+                    Juridiction UE · Hors Cloud Act direct
                   </span>
-                ) : (
+                )}
+                {tool.jurisdictionStatus === 'ADEQUACY_RGPD_NON_EU' && (
+                  <span class="px-2.5 py-0.5 rounded text-xs font-medium bg-zinc-100 text-zinc-800 border border-zinc-300">
+                    Hors UE · Adéquation RGPD ({tool.vendorCountry})
+                  </span>
+                )}
+                {tool.jurisdictionStatus === 'US_CLOUD_ACT' && (
                   <span class="px-2.5 py-0.5 rounded text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200">
-                    Juridiction {tool.vendorCountry}
+                    Juridiction US · Soumis Cloud Act
                   </span>
                 )}
               </div>
@@ -252,7 +266,7 @@ const defaultWebhookUrl =
               <div class="grid grid-cols-1 gap-3 mb-4 text-xs">
                 <div class="bg-white border border-zinc-200 rounded p-3">
                   <p class="font-display font-semibold text-emerald-800 uppercase mb-1.5">
-                    Points forts audités (+)
+                    Points forts constatés (+)
                   </p>
                   <ul class="space-y-1 text-zinc-700 list-disc pl-4">
                     {tool.pros.map((pro) => (
@@ -274,7 +288,7 @@ const defaultWebhookUrl =
             </div>
 
             <div class="pt-3 border-t border-zinc-200 flex items-center justify-between text-xs text-zinc-500">
-              <span>Preuve tarifaire : {tool.lastVerifiedDate}</span>
+              <span>Relevé tarifaire : {tool.lastVerifiedDate}</span>
               <a
                 href={`/go/${tool.slug}`}
                 target="_blank"
@@ -326,27 +340,40 @@ const defaultWebhookUrl =
     >
       <div class="bg-zinc-100/80 border-b border-zinc-200 px-6 py-3 flex items-center justify-between">
         <span class="text-xs font-display font-semibold uppercase tracking-wider text-zinc-800">
-          Cellule d'Accompagnement Achats B2B (20 à 500 postes)
+          Dossier d'Évaluation B2B & Matrice PDF (20 à 500 postes)
         </span>
         <span class="font-mono text-xs text-zinc-500">Art. 21 NIS2 / DORA</span>
       </div>
-      <div class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
-        <div class="lg:col-span-2">
+      <div class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div class="lg:col-span-5">
           <h2 class="text-xl font-display font-bold text-zinc-950 mb-2">
-            Recevoir la Matrice d'Homologation NIS2 (PDF) et Devis Groupé
+            Recevoir la Matrice de Conformité NIS2 (PDF)
           </h2>
-          <p class="text-sm text-zinc-600 leading-relaxed">
-            Obtenez le dossier complet de conformité Article 21 (cartographie ANSSI et CCB CyberFundamentals, comparatif TCO sur 36 mois et clauses de réversibilité) pour présenter votre arbitrage en comité de direction.
+          <p class="text-sm text-zinc-600 leading-relaxed mb-4">
+            Téléchargez le dossier récapitulatif Article 21 (cartographie des 10 alinéas réglementaires, comparatif TCO indicatif sur 50 et 200 postes et statut juridictionnel des 13 solutions) pour structurer votre arbitrage en comité de direction.
+          </p>
+          <p class="text-xs text-zinc-500 leading-relaxed">
+            Traitement conforme au RGPD : votre adresse email n'est jamais cédée à un tiers sans votre consentement explicite ci-contre.
           </p>
         </div>
-        <div class="bg-zinc-50 p-5 rounded border border-zinc-200">
+        <div class="lg:col-span-7 bg-zinc-50 p-5 rounded border border-zinc-200">
           <form
             class="space-y-3"
             data-lead-form
             data-silo={comparison.data.category}
             data-slug={comparison.id}
-            data-webhook-url={defaultWebhookUrl}
           >
+            <div class="hidden" aria-hidden="true">
+              <label for="lead-website-url">Website</label>
+              <input
+                id="lead-website-url"
+                name="website_url"
+                type="text"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
+
             <div>
               <label for="lead-email" class="block text-xs font-medium text-zinc-700 mb-1">
                 Email Professionnel (DSI / RSSI / Direction)
@@ -359,7 +386,8 @@ const defaultWebhookUrl =
                 class="w-full px-3 py-2 rounded bg-white border border-zinc-200 text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-zinc-900"
               />
             </div>
-            <div class="grid grid-cols-2 gap-2.5">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               <div>
                 <label for="lead-tool" class="block text-xs font-medium text-zinc-700 mb-1">
                   Solution évaluée
@@ -383,6 +411,32 @@ const defaultWebhookUrl =
                 />
               </div>
             </div>
+
+            <div class="space-y-2 pt-1">
+              <label class="flex items-start gap-2.5 text-xs text-zinc-700 cursor-pointer">
+                <input
+                  id="lead-consent-privacy"
+                  type="checkbox"
+                  required
+                  class="mt-0.5 w-3.5 h-3.5 accent-zinc-900 rounded shrink-0 cursor-pointer"
+                />
+                <span>
+                  J'accepte que mon adresse email soit traitée pour recevoir la matrice PDF conformément à la <a href="/confidentialite" class="underline font-medium text-zinc-900">Politique de Confidentialité</a>. *
+                </span>
+              </label>
+
+              <label class="flex items-start gap-2.5 text-xs text-zinc-600 cursor-pointer">
+                <input
+                  id="lead-consent-partner"
+                  type="checkbox"
+                  class="mt-0.5 w-3.5 h-3.5 accent-zinc-900 rounded shrink-0 cursor-pointer"
+                />
+                <span>
+                  Je souhaite être mis en relation avec un intégrateur ou éditeur partenaire pour obtenir un chiffrage personnalisé (optionnel).
+                </span>
+              </label>
+            </div>
+
             <button
               type="submit"
               class="w-full py-2.5 px-4 rounded bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-xs transition-colors cursor-pointer"
@@ -400,7 +454,7 @@ const defaultWebhookUrl =
     {relatedComparisons.length > 0 && (
       <section class="my-10">
         <h2 class="text-base font-display font-bold text-zinc-950 mb-4 uppercase tracking-wider">
-          Autres Comparatifs et Audits d'Architecture NIS2
+          Autres Comparatifs et Analyses d'Architecture NIS2
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           {relatedComparisons.map((rel) => (
@@ -412,7 +466,7 @@ const defaultWebhookUrl =
                 <span class="px-2 py-0.5 bg-zinc-100 border border-zinc-200 text-zinc-800 rounded font-mono font-medium">
                   {rel.data.category}
                 </span>
-                <span>Mis à jour le {rel.data.updatedDate}</span>
+                <span>Relevé le {rel.data.updatedDate}</span>
               </div>
               <h3 class="text-base font-display font-bold text-zinc-950 group-hover:text-zinc-700 transition-colors mb-1.5">
                 {rel.data.title}
@@ -442,39 +496,29 @@ const defaultWebhookUrl =
           const emailInput = form.querySelector('#lead-email') as HTMLInputElement | null;
           const toolInput = form.querySelector('#lead-tool') as HTMLInputElement | null;
           const seatsInput = form.querySelector('#lead-seats') as HTMLInputElement | null;
+          const honeypotInput = form.querySelector('#lead-website-url') as HTMLInputElement | null;
+          const privacyInput = form.querySelector('#lead-consent-privacy') as HTMLInputElement | null;
+          const partnerInput = form.querySelector('#lead-consent-partner') as HTMLInputElement | null;
           const msg = form.querySelector('[data-form-msg]');
 
-          const email = emailInput ? emailInput.value.trim() : '';
-          const tool = toolInput ? toolInput.value.trim() : '';
-          const seats = seatsInput ? seatsInput.value.trim() : '50 postes';
-          const silo = form.dataset.silo || '';
-          const sourceUrl = window.location.href;
-
           const payload = {
-            email,
-            tool,
-            seats,
-            silo,
-            sourceUrl,
-            content: `[NOUVEAU LEAD B2B NIS2] Email: ${email} | Outil: ${tool} | Parc: ${seats} | Silo: ${silo} | Source: ${sourceUrl}`
+            email: emailInput ? emailInput.value.trim() : '',
+            tool: toolInput ? toolInput.value.trim() : '',
+            seats: seatsInput ? seatsInput.value.trim() : '50 postes',
+            silo: form.dataset.silo || '',
+            sourceUrl: window.location.href,
+            website_url: honeypotInput ? honeypotInput.value : '',
+            consentPrivacy: privacyInput ? privacyInput.checked : false,
+            consentPartnerShare: partnerInput ? partnerInput.checked : false
           };
 
           try {
-            const existing = JSON.parse(localStorage.getItem('nis2_b2b_leads') || '[]');
-            existing.push(payload);
-            localStorage.setItem('nis2_b2b_leads', JSON.stringify(existing));
+            await fetch('/api/lead', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
           } catch {}
-
-          const webhookUrl = form.dataset.webhookUrl || '';
-          if (webhookUrl) {
-            try {
-              await fetch(webhookUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-              });
-            } catch {}
-          }
 
           if (msg) {
             msg.classList.remove('hidden');
@@ -482,7 +526,7 @@ const defaultWebhookUrl =
 
           const link = document.createElement('a');
           link.href = '/matrice-homologation-nis2.pdf';
-          link.download = 'Matrice-Homologation-NIS2-Article21.pdf';
+          link.download = 'Matrice-Conformite-NIS2-Article21.pdf';
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);

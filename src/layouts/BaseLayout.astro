@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { title, description, jsonLd } = Astro.props;
-const siteOrigin = Astro.site ? Astro.site.origin : 'https://nis2-stack-hub.com';
+const siteOrigin = Astro.site ? Astro.site.origin : 'https://nis2-stack-hub.pages.dev';
 const ogImageUrl = `${siteOrigin}/og-cover.webp`;
 ---
 
@@ -53,16 +53,16 @@ const ogImageUrl = `${siteOrigin}/og-cover.webp`;
             UE 2022/2555
           </span>
           <span class="text-zinc-600 hidden sm:inline">
-            Référentiel d'Audit Technique et Tarifaire — Article 21 NIS2 / DORA / CCB CyberFundamentals
+            Référentiel d'Analyse Technique et Tarifaire — Article 21 NIS2 / DORA / CCB CyberFundamentals
           </span>
         </div>
         <div class="flex items-center gap-4 text-xs text-zinc-600">
-          <span>Juridictions : France, Belgique, Suisse</span>
+          <span>Périmètre : France, Belgique, Suisse</span>
           <span class="inline-flex items-center gap-1.5 text-emerald-700 font-medium">
             <svg class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            Base tarifaire vérifiée
+            Relevés tarifaires publics indicatifs
           </span>
         </div>
       </div>
@@ -77,7 +77,8 @@ const ogImageUrl = `${siteOrigin}/og-cover.webp`;
         <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-600">
           <a href="/#silos" class="hover:text-zinc-950 transition-colors">Silos Article 21</a>
           <a href="/#comparatifs" class="hover:text-zinc-950 transition-colors">Comparatifs & Duels</a>
-          <a href="/#matrice-outils" class="hover:text-zinc-950 transition-colors">Matrice Souveraineté</a>
+          <a href="/#matrice-outils" class="hover:text-zinc-950 transition-colors">Matrice Juridictionnelle</a>
+          <a href="/methodologie" class="hover:text-zinc-950 transition-colors">Méthodologie</a>
           <a
             href="/#comparatifs"
             class="px-3.5 py-1.5 rounded bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-xs transition-colors"
@@ -100,7 +101,7 @@ const ogImageUrl = `${siteOrigin}/og-cover.webp`;
               <BrandLogo size="sm" showSubtitle={false} />
             </div>
             <p class="text-xs text-zinc-600 leading-relaxed max-w-md">
-              Cellule indépendante d'évaluation technologique et budgétaire destinée aux DSI, RSSI, MSP et dirigeants d'Entités Essentielles (EE) et d'Entités Importantes (EI) en France (ANSSI), Belgique (CCB) et Suisse (NCSC).
+              Projet indépendant d'analyse d'architecture réseau et d'évaluation budgétaire destiné aux DSI, RSSI, MSP et dirigeants d'Entités Essentielles (EE) et d'Entités Importantes (EI) en France (ANSSI), Belgique (CCB) et Suisse (NCSC).
             </p>
           </div>
           <div>
@@ -108,27 +109,31 @@ const ogImageUrl = `${siteOrigin}/og-cover.webp`;
               Silos d'Architecture
             </p>
             <ul class="space-y-2 text-xs text-zinc-600">
-              <li><a href="/#silos" class="hover:text-zinc-950 transition-colors">EDR / XDR & Postes (<span class="font-mono">Art. 21.2.b</span>)</a></li>
-              <li><a href="/#silos" class="hover:text-zinc-950 transition-colors">SASE / VPN Zero Trust (<span class="font-mono">Art. 21.2.i</span>)</a></li>
-              <li><a href="/#silos" class="hover:text-zinc-950 transition-colors">GRC & Pilotage NIS2 (<span class="font-mono">Art. 21.2.a</span>)</a></li>
-              <li><a href="/#silos" class="hover:text-zinc-950 transition-colors">IAM / PAM & Sauvegarde (<span class="font-mono">Art. 21.2.c</span>)</a></li>
+              <li><a href="/#silo-EDR_XDR" class="hover:text-zinc-950 transition-colors">EDR / XDR & Postes (<span class="font-mono">Art. 21.2.b</span>)</a></li>
+              <li><a href="/#silo-SASE_VPN" class="hover:text-zinc-950 transition-colors">SASE / VPN Zero Trust (<span class="font-mono">Art. 21.2.i</span>)</a></li>
+              <li><a href="/#silo-GRC_NIS2" class="hover:text-zinc-950 transition-colors">GRC & Pilotage NIS2 (<span class="font-mono">Art. 21.2.a</span>)</a></li>
+              <li><a href="/#silo-IAM_PAM" class="hover:text-zinc-950 transition-colors">IAM / PAM & Sauvegarde (<span class="font-mono">Art. 21.2.c</span>)</a></li>
             </ul>
           </div>
           <div>
             <p class="text-xs font-display font-semibold text-zinc-900 uppercase tracking-wider mb-3">
-              Méthodologie d'Audit
+              Transparence & Conformité
             </p>
             <ul class="space-y-2 text-xs text-zinc-600">
-              <li>Grilles tarifaires horodatées sous preuve WebP</li>
-              <li>Qualification d'exposition US Cloud Act / FISA 702</li>
-              <li>Calcul de TCO réel incluant paliers minimums</li>
-              <li>Indépendance éditoriale et transparence B2B</li>
+              <li><a href="/methodologie" class="hover:text-zinc-950 underline transition-colors">Méthodologie d'Analyse & Calcul TCO</a></li>
+              <li><a href="/mentions-legales" class="hover:text-zinc-950 underline transition-colors">Mentions Légales & Transparence Affiliation</a></li>
+              <li><a href="/confidentialite" class="hover:text-zinc-950 underline transition-colors">Politique de Confidentialité (RGPD)</a></li>
+              <li>Relevés tarifaires publics indicatifs horodatés</li>
             </ul>
           </div>
         </div>
         <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4">
-          <p>© {new Date().getFullYear()} NIS2 // STACK HUB. Audit de conformité logicielle B2B.</p>
-          <p>Normes de référence : Directive (UE) 2022/2555, Règlement DORA, ISO/IEC 27001</p>
+          <p>© {new Date().getFullYear()} NIS2 // STACK HUB. Analyse comparative de solutions logicielles B2B.</p>
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="/methodologie" class="hover:text-zinc-900">Méthodologie</a>
+            <a href="/mentions-legales" class="hover:text-zinc-900">Mentions légales</a>
+            <a href="/confidentialite" class="hover:text-zinc-900">Confidentialité RGPD</a>
+          </div>
         </div>
       </div>
     </footer>

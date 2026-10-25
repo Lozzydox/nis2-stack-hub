@@ -31,5 +31,6 @@
   "affiliateUrl": "https://nordlayer.com/fr/pricing/",
   "pricingScreenshotPath": "/proofs/nordlayer-pricing.webp",
   "lastVerifiedDate": "2026-10-24",
-  "hasActiveAffiliateLink": false
+  "hasActiveAffiliateLink": false,
+  "jurisdictionStatus": "EU_MEMBER"
 }

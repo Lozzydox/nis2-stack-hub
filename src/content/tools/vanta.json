@@ -31,5 +31,6 @@
   "affiliateUrl": "https://www.vanta.com/pricing",
   "pricingScreenshotPath": "/proofs/vanta-pricing.webp",
   "lastVerifiedDate": "2026-10-24",
-  "hasActiveAffiliateLink": false
+  "hasActiveAffiliateLink": false,
+  "jurisdictionStatus": "US_CLOUD_ACT"
 }

@@ -23,7 +23,7 @@ const silos = [
     code: 'GRC_NIS2',
     name: 'Pilotage GRC & Conformité NIS2 / DORA',
     nis2Ref: 'Art. 21.2.a & 21.2.f',
-    description: 'Gouvernance des risques cyber, homologation ANSSI / CCB CyberFundamentals et suivi continu des plans de remédiation.'
+    description: 'Gouvernance des risques cyber, alignement ANSSI / CCB CyberFundamentals et suivi continu des plans de remédiation.'
   },
   {
     code: 'IAM_PAM',
@@ -49,13 +49,19 @@ const indexSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'NIS2-STACK-HUB',
-  description: 'Référentiel B2B d audit technique, de souveraineté européenne et de calcul de TCO pour les solutions de cybersécurité conformes à la directive NIS2 (Article 21) et DORA.'
+  description: 'Référentiel B2B d analyse technique, de qualification juridictionnelle et de calcul de TCO pour les solutions de cybersécurité conformes à la directive NIS2 (Article 21) et DORA.'
 };
+
+function formatShortJurisdiction(jStatus: string, country: string): string {
+  if (jStatus === 'EU_MEMBER') return `Juridiction UE (${country})`;
+  if (jStatus === 'ADEQUACY_RGPD_NON_EU') return `Hors UE · Adéquation RGPD (${country})`;
+  return `Juridiction US · Cloud Act`;
+}
 ---
 
 <BaseLayout
-  title="NIS2 // STACK HUB | Comparatifs Cyber B2B, Souveraineté UE & Calculateur TCO"
-  description="Référentiel indépendant d'audit technique et tarifaire pour DSI, RSSI et PME/ETI soumis à la directive NIS2 (Article 21), au CCB CyberFundamentals et au règlement DORA."
+  title="NIS2 // STACK HUB | Comparatifs Cyber B2B, Juridiction UE & Calculateur TCO"
+  description="Référentiel indépendant d'analyse technique et tarifaire pour DSI, RSSI et PME/ETI soumis à la directive NIS2 (Article 21), au CCB CyberFundamentals et au règlement DORA."
   jsonLd={indexSchema}
 >
   <section class="relative bg-white border-b border-zinc-200 py-14 sm:py-20 overflow-hidden">
@@ -73,11 +79,11 @@ const indexSchema = {
           </div>
 
           <h1 class="text-3xl sm:text-4xl lg:text-[2.65rem] font-display font-bold tracking-tight text-zinc-950 leading-[1.12] mb-5">
-            Arbitrage Technologique, Souveraineté UE et Calcul de TCO sous Directive NIS2
+            Arbitrage Technologique, Juridiction UE et Calcul de TCO sous Directive NIS2
           </h1>
 
           <p class="text-sm sm:text-base text-zinc-600 leading-relaxed mb-7">
-            Bâtissez votre pile de sécurité conforme à l'Article 21 de la directive (UE) 2022/2555 sans surcoût caché. Chaque logiciel est audité sur sa juridiction réelle (exposition US Cloud Act vs Souveraineté Européenne), ses certifications (ISO 27001, SOC 2, ANSSI) et ses grilles tarifaires vérifiées sous preuve horodatée.
+            Bâtissez votre pile de sécurité conforme à l'Article 21 de la directive (UE) 2022/2555 sans surcoût caché. Chaque logiciel est évalué sur sa juridiction exacte (Juridiction UE, Adéquation RGPD hors UE ou exposition US Cloud Act), ses certifications (ISO 27001, SOC 2, ANSSI) et ses relevés tarifaires publics indicatifs.
           </p>
 
           <div class="flex flex-wrap gap-3">
@@ -98,7 +104,7 @@ const indexSchema = {
               <svg class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
               </svg>
-              <span>Matrice d'Homologation PDF</span>
+              <span>Matrice de Conformité PDF</span>
             </a>
           </div>
         </div>
@@ -111,21 +117,21 @@ const indexSchema = {
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12 pt-8 border-t border-zinc-200 animate-fade-up-delay-2">
         <div class="bg-white/90 border border-zinc-200 rounded p-4">
           <p class="text-2xl font-bold font-mono text-zinc-950">{tools.length}</p>
-          <p class="text-xs text-zinc-500 mt-0.5">Solutions B2B Auditées</p>
+          <p class="text-xs text-zinc-500 mt-0.5">Solutions B2B Évaluées</p>
         </div>
         <div class="bg-white/90 border border-zinc-200 rounded p-4">
           <p class="text-2xl font-bold font-mono text-emerald-700">
-            {tools.filter((t) => t.data.isEuropeanSovereign).length} / {tools.length}
+            {tools.filter((t) => t.data.jurisdictionStatus === 'EU_MEMBER').length} UE + {tools.filter((t) => t.data.jurisdictionStatus === 'ADEQUACY_RGPD_NON_EU').length} RGPD
           </p>
-          <p class="text-xs text-zinc-500 mt-0.5">Exemptes US Cloud Act</p>
+          <p class="text-xs text-zinc-500 mt-0.5">Hors Cloud Act US Direct</p>
         </div>
         <div class="bg-white/90 border border-zinc-200 rounded p-4">
           <p class="text-2xl font-bold font-mono text-zinc-950">{comparisons.length}</p>
           <p class="text-xs text-zinc-500 mt-0.5">Dossiers Comparatifs TCO</p>
         </div>
         <div class="bg-white/90 border border-zinc-200 rounded p-4">
-          <p class="text-2xl font-bold font-mono text-zinc-950">10 - 500p</p>
-          <p class="text-xs text-zinc-500 mt-0.5">Simulation de Parc Temps Réel</p>
+          <p class="text-2xl font-bold font-mono text-zinc-950">6 / 6</p>
+          <p class="text-xs text-zinc-500 mt-0.5">Silos Article 21 Couverts</p>
         </div>
       </div>
     </div>
@@ -152,7 +158,7 @@ const indexSchema = {
           .map((slug) => tools.find((t) => t.data.slug === slug)?.data)
           .filter((t): t is NonNullable<typeof t> => Boolean(t));
 
-        const hasSovereign = compTools.some((t) => t.isEuropeanSovereign);
+        const hasEuMember = compTools.some((t) => t.jurisdictionStatus === 'EU_MEMBER');
 
         return (
           <article class="bg-white border border-zinc-200 hover:border-zinc-400 hover:-translate-y-0.5 hover:shadow-sm rounded-md p-6 flex flex-col justify-between transition-all duration-200 group">
@@ -161,12 +167,12 @@ const indexSchema = {
                 <span class="px-2.5 py-0.5 rounded bg-zinc-100 border border-zinc-200 text-zinc-800 font-mono text-[11px] font-medium">
                   {comp.data.category}
                 </span>
-                {hasSovereign && (
+                {hasEuMember && (
                   <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 text-[11px] font-medium">
                     <svg class="w-3 h-3 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    Inclut Option Souveraine UE
+                    Inclut Juridiction UE
                   </span>
                 )}
               </div>
@@ -199,7 +205,7 @@ const indexSchema = {
                       <div class="text-xs">
                         <span class="font-display font-bold text-zinc-900 block leading-tight">{t.name}</span>
                         <span class="text-[11px] text-zinc-500">
-                          {t.isEuropeanSovereign ? `Souverain UE (${t.vendorCountry})` : `Juridiction ${t.vendorCountry}`}
+                          {formatShortJurisdiction(t.jurisdictionStatus, t.vendorCountry)}
                         </span>
                       </div>
                     </div>
@@ -210,7 +216,7 @@ const indexSchema = {
 
             <div class="pt-4 border-t border-zinc-200 flex items-center justify-between">
               <span class="text-xs text-zinc-500">
-                Vérifié le {comp.data.updatedDate}
+                Relevé le {comp.data.updatedDate}
               </span>
               <a
                 href={`/comparatifs/${comp.id}`}
@@ -293,7 +299,7 @@ const indexSchema = {
                   </div>
                 ) : (
                   <span class="text-xs text-zinc-400">
-                    Audit sectoriel en cours
+                    Analyse sectorielle en cours
                   </span>
                 )}
               </div>
@@ -308,14 +314,14 @@ const indexSchema = {
     <div class="mb-8 pb-4 border-b border-zinc-200 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
       <div>
         <span class="text-xs uppercase tracking-wider text-zinc-500 font-semibold block">
-          Base de Données Vérifiée E-E-A-T
+          Base de Données Documentée
         </span>
         <h2 class="text-2xl font-display font-bold text-zinc-950 mt-1">
-          Matrice de Souveraineté et Tarification des Logiciels Audités
+          Matrice Juridictionnelle et Tarification Indicative des Logiciels Évalués
         </h2>
       </div>
       <span class="text-xs text-zinc-500">
-        Tarifs publics HT constatés sous preuve WebP
+        Relevés tarifaires publics indicatifs HT sous preuve WebP
       </span>
     </div>
 
@@ -325,8 +331,8 @@ const indexSchema = {
           <tr>
             <th class="py-3.5 px-4 font-display font-semibold">Solution Logicielle</th>
             <th class="py-3.5 px-4 font-display font-semibold">Silo</th>
-            <th class="py-3.5 px-4 font-display font-semibold">Juridiction & Statut Cloud Act</th>
-            <th class="py-3.5 px-4 font-display font-semibold">Prix d'Entrée HT</th>
+            <th class="py-3.5 px-4 font-display font-semibold">Statut Juridictionnel & Cloud Act</th>
+            <th class="py-3.5 px-4 font-display font-semibold">Prix d'Entrée Indicatif HT</th>
             <th class="py-3.5 px-4 font-display font-semibold">Seuil Min.</th>
             <th class="py-3.5 px-4 font-display font-semibold">Certifications</th>
             <th class="py-3.5 px-4 font-display font-semibold text-right">Portail</th>
@@ -345,25 +351,37 @@ const indexSchema = {
                       loading="lazy"
                     />
                   </div>
-                  <span class="font-display font-bold text-zinc-950">
-                    {tool.data.name}
-                  </span>
+                  <div>
+                    <span class="font-display font-bold text-zinc-950 block">
+                      {tool.data.name}
+                    </span>
+                    <span class="text-[11px] text-zinc-500">{tool.data.vendorCountry}</span>
+                  </div>
                 </div>
               </td>
               <td class="py-3.5 px-4 font-mono text-xs text-zinc-600">
                 {tool.data.category}
               </td>
               <td class="py-3.5 px-4">
-                {tool.data.isEuropeanSovereign ? (
+                {tool.data.jurisdictionStatus === 'EU_MEMBER' && (
                   <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-medium">
                     <svg class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    Souverain UE ({tool.data.vendorCountry})
+                    Juridiction UE · Hors Cloud Act direct
                   </span>
-                ) : (
+                )}
+                {tool.data.jurisdictionStatus === 'ADEQUACY_RGPD_NON_EU' && (
+                  <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-zinc-100 text-zinc-800 border border-zinc-300 text-xs font-medium">
+                    <svg class="w-3.5 h-3.5 text-zinc-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Hors UE · Adéquation RGPD ({tool.data.vendorCountry})
+                  </span>
+                )}
+                {tool.data.jurisdictionStatus === 'US_CLOUD_ACT' && (
                   <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-amber-50 text-amber-900 border border-amber-200 text-xs font-medium">
-                    Juridiction {tool.data.vendorCountry}
+                    Juridiction US · Soumis Cloud Act
                   </span>
                 )}
               </td>

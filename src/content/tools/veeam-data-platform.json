@@ -31,5 +31,6 @@
   "affiliateUrl": "https://www.veeam.com/fr/products/veeam-data-platform.html",
   "pricingScreenshotPath": "/proofs/veeam-data-platform-pricing.webp",
   "lastVerifiedDate": "2026-10-24",
-  "hasActiveAffiliateLink": false
+  "hasActiveAffiliateLink": false,
+  "jurisdictionStatus": "US_CLOUD_ACT"
 }

@@ -18,11 +18,21 @@ const brandEmblemSvg = `<svg width="26" height="26" viewBox="0 0 24 24" fill="no
   <rect x="10.25" y="10.25" width="3.5" height="3.5" rx="0.75" fill="#059669" />
 </svg>`;
 
+function formatJurisdictionLabel(t) {
+  if (t.jurisdictionStatus === 'EU_MEMBER') {
+    return 'Juridiction UE · Hors Cloud Act direct';
+  }
+  if (t.jurisdictionStatus === 'ADEQUACY_RGPD_NON_EU') {
+    return `Hors UE · Adéquation RGPD (${t.vendorCountry})`;
+  }
+  return 'Juridiction US · Soumis Cloud Act';
+}
+
 const htmlContent = `<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <title>Matrice d'Homologation Technique et Financière NIS2 (Article 21)</title>
+  <title>Matrice d'Évaluation Technique et Financière NIS2 (Article 21)</title>
   <style>
     @page {
       size: A4;
@@ -151,17 +161,17 @@ const htmlContent = `<!doctype html>
         <span class="brand-wordmark">NIS2<span class="brand-slash">//</span>STACK HUB</span>
         <span class="badge">DIRECTIVE (UE) 2022/2555 · ANSSI · CCB · DORA</span>
       </div>
-      <h1>Matrice d'Homologation Technique & Financière NIS2 (Article 21)</h1>
-      <p class="sub">Dossier d'arbitrage budgétaire et de conformité juridictionnelle pour DSI, RSSI et Comités de Direction (Parcs de 20 à 500 postes)</p>
+      <h1>Matrice d'Évaluation Technique & Financière NIS2 (Article 21)</h1>
+      <p class="sub">Dossier d'arbitrage budgétaire et de qualification juridictionnelle pour DSI, RSSI et Comités de Direction (Parcs de 20 à 500 postes)</p>
     </div>
     <div style="text-align:right;font-size:8pt;color:#52525b;">
       <strong>NIS2 // STACK HUB</strong><br/>
-      Référentiel B2B Vérifié<br/>
+      6/6 Silos Article 21 Couverts<br/>
       Page 1 / 2
     </div>
   </div>
 
-  <h2>1. Checklist d'Homologation Réglementaire — Article 21.2 Directive NIS2</h2>
+  <h2>1. Checklist de Couverture Réglementaire — Article 21.2 Directive NIS2</h2>
   <table>
     <thead>
       <tr>
@@ -194,7 +204,7 @@ const htmlContent = `<!doctype html>
         <td class="mono">Art. 21.2.d</td>
         <td>Sécurité de la chaîne d'approvisionnement (Supply Chain)</td>
         <td class="mono">IAM_PAM / GRC</td>
-        <td>Évaluation cyber des sous-traitants, immunité extraterritoriale (Cloud Act) et bastion PAM avec audit vidéo des tiers.</td>
+        <td>Évaluation cyber des sous-traitants, qualification extraterritoriale (Cloud Act) et bastion PAM avec audit des tiers.</td>
       </tr>
       <tr>
         <td class="mono">Art. 21.2.e</td>
@@ -246,10 +256,10 @@ const htmlContent = `<!doctype html>
       <div class="brand-lockup">
         <span class="brand-icon">${brandEmblemSvg}</span>
         <span class="brand-wordmark">NIS2<span class="brand-slash">//</span>STACK HUB</span>
-        <span class="badge">MATRICE COMPARATIVE DES 13 SOLUTIONS AUDITÉES (6/6 SILOS)</span>
+        <span class="badge">MATRICE COMPARATIVE DES 13 SOLUTIONS ÉVALUÉES (6/6 SILOS ARTICLE 21 COUVERTS)</span>
       </div>
-      <h1>Référentiel Tarifaire (TCO) & Souveraineté Juridictionnelle</h1>
-      <p class="sub">Simulation budgétaire comparative pour parcs de 50 postes et 200 postes (Montants HT vérifiés sous preuve officielle)</p>
+      <h1>Relevés Tarifaires Indicatifs (TCO) & Taxonomie Juridictionnelle</h1>
+      <p class="sub">Simulation budgétaire comparative pour parcs de 50 postes et 200 postes (Montants HT basés sur les relevés publics)</p>
     </div>
     <div style="text-align:right;font-size:8pt;color:#52525b;">
       <strong>NIS2 // STACK HUB</strong><br/>
@@ -257,18 +267,18 @@ const htmlContent = `<!doctype html>
     </div>
   </div>
 
-  <h2>2. Tableau Récapitulatif des Solutions Technologiques Auditées</h2>
+  <h2>2. Tableau Récapitulatif des Solutions Technologiques Évaluées</h2>
   <table>
     <thead>
       <tr>
         <th>Logiciel</th>
         <th>Silo</th>
-        <th>Juridiction</th>
-        <th>Statut Cloud Act</th>
-        <th>Tarif Unitaire HT</th>
+        <th>Pays</th>
+        <th>Statut Juridictionnel & Cloud Act</th>
+        <th>Tarif Unitaire Indicatif</th>
         <th>Min.</th>
-        <th>TCO Annuel 50p</th>
-        <th>TCO Annuel 200p</th>
+        <th>TCO Indicatif 50p</th>
+        <th>TCO Indicatif 200p</th>
       </tr>
     </thead>
     <tbody>
@@ -290,7 +300,7 @@ const htmlContent = `<!doctype html>
             <td><strong>${t.name}</strong></td>
             <td class="mono">${t.category}</td>
             <td>${t.vendorCountry}</td>
-            <td>${t.isEuropeanSovereign ? 'Exempt Cloud Act (UE/CH)' : 'Soumis Cloud Act US'}</td>
+            <td>${formatJurisdictionLabel(t)}</td>
             <td class="mono">${unitStr}</td>
             <td class="mono">${t.minimumSeats}p</td>
             <td class="mono">${tco50}</td>
@@ -301,31 +311,31 @@ const htmlContent = `<!doctype html>
     </tbody>
   </table>
 
-  <h2>3. Architecture Cible Recommandée par Profil d'Entité</h2>
+  <h2>3. Architecture Cible Indicative par Profil d'Entité</h2>
   <table>
     <thead>
       <tr>
         <th style="width:25%;">Profil d'Organisation</th>
-        <th style="width:45%;">Pile Technologique Souveraine Recommandée</th>
-        <th style="width:30%;">Budget Annuel Global Estimé (Hors GRC)</th>
+        <th style="width:45%;">Pile Technologique Recommandée</th>
+        <th style="width:30%;">Budget Annuel Indicatif (Hors GRC)</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><strong>PME / Entité Importante (50 postes)</strong><br/>Sans équipe SOC dédiée</td>
-        <td>Bitdefender GravityZone (EDR) + NordLayer (ZTNA) + Proton Pass Business (EPM) + Acronis Cyber Protect (Backup) + Intruder (Scan)</td>
+        <td>Bitdefender GravityZone (UE) + NordLayer (UE) + Proton Pass Business (Adéquation RGPD CH) + Acronis (CH) + Intruder (UK)</td>
         <td class="mono">~16 500 EUR à 22 000 EUR HT / an</td>
       </tr>
       <tr>
-        <td><strong>ETI / Entité Essentielle (200 postes)</strong><br/>Exigence ANSSI / Souveraineté stricte</td>
-        <td>HarfangLab EDR (Qualifié ANSSI) + Wallix PAM4ALL (Bastion CSPN) + Tenacy (GRC SecNumCloud) + Greenbone Enterprise + Veeam / Acronis</td>
+        <td><strong>ETI / Entité Essentielle (200 postes)</strong><br/>Exigence Juridiction UE stricte</td>
+        <td>HarfangLab EDR (Qualifié ANSSI, UE) + Wallix PAM4ALL (CSPN, UE) + Tenacy (GRC, UE) + Greenbone Enterprise (UE)</td>
         <td class="mono">Sur devis intégrateur / MSSP (35 000 EUR+ / an)</td>
       </tr>
     </tbody>
   </table>
 
   <div class="footer-note">
-    <strong>Méthodologie d'Audit NIS2 // STACK HUB :</strong> Les prix indiqués correspondent aux tarifs publics d'entrée constatés hors taxes et hors options de stockage volumétrique ou prestations d'intégration sur site. Pour actualiser vos simulations de 10 à 500 postes en temps réel, rendez-vous sur le simulateur interactif en ligne.
+    <strong>Avertissement Méthodologique NIS2 // STACK HUB :</strong> Estimations basées sur les tarifs publics éditeurs relevés à la date indiquée ; les tarifs finaux via intégrateurs (VAR/MSP) peuvent varier selon les remises volumétriques et options de stockage. Ce document constitue un outil d'aide à la décision et ne remplace pas une homologation formelle ANSSI ou CCB.
   </div>
 </body>
 </html>`;
@@ -349,4 +359,4 @@ if (res.status !== 0 || !fs.existsSync(outPdf)) {
   process.exit(1);
 }
 
-console.log(`[PDF-GENERATOR] Matrice PDF générée avec succès : ${outPdf} (${fs.statSync(outPdf).size} octets)`);
+console.log(`[PDF-GENERATOR] Matrice PDF régénérée avec succès : ${outPdf} (${fs.statSync(outPdf).size} octets)`);

@@ -3,7 +3,7 @@
   "slug": "acronis-cyber-protect",
   "category": "BACKUP_DR",
   "vendorCountry": "Suisse",
-  "isEuropeanSovereign": true,
+  "isEuropeanSovereign": false,
   "startingPriceMonthlyEur": 5.9,
   "pricingModel": "PER_ENDPOINT",
   "minimumSeats": 5,
@@ -32,5 +32,6 @@
   "affiliateUrl": "https://www.acronis.com/fr-fr/products/cloud/cyber-protect/",
   "pricingScreenshotPath": "/proofs/acronis-cyber-protect-pricing.webp",
   "lastVerifiedDate": "2026-10-24",
-  "hasActiveAffiliateLink": false
+  "hasActiveAffiliateLink": false,
+  "jurisdictionStatus": "ADEQUACY_RGPD_NON_EU"
 }

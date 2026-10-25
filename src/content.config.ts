@@ -10,6 +10,7 @@ const toolsCollection = defineCollection({
         category: z.enum(['EDR_XDR', 'SASE_VPN', 'IAM_PAM', 'BACKUP_DR', 'GRC_NIS2', 'VULN_PENTEST']),
         vendorCountry: z.string(),
         isEuropeanSovereign: z.boolean(),
+        jurisdictionStatus: z.enum(['EU_MEMBER', 'ADEQUACY_RGPD_NON_EU', 'US_CLOUD_ACT']),
         startingPriceMonthlyEur: z.number(),
         pricingModel: z.enum(['PER_USER', 'PER_ENDPOINT', 'FLAT_RATE', 'CUSTOM_QUOTE']),
         minimumSeats: z.number(),

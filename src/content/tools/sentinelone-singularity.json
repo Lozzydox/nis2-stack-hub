@@ -34,5 +34,6 @@
   "affiliateUrl": "https://www.sentinelone.com/platform-packages/",
   "pricingScreenshotPath": "/proofs/sentinelone-singularity-pricing.webp",
   "lastVerifiedDate": "2026-10-24",
-  "hasActiveAffiliateLink": false
+  "hasActiveAffiliateLink": false,
+  "jurisdictionStatus": "US_CLOUD_ACT"
 }

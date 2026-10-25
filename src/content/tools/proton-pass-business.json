@@ -3,7 +3,7 @@
   "slug": "proton-pass-business",
   "category": "IAM_PAM",
   "vendorCountry": "Suisse",
-  "isEuropeanSovereign": true,
+  "isEuropeanSovereign": false,
   "startingPriceMonthlyEur": 1.99,
   "pricingModel": "PER_USER",
   "minimumSeats": 1,
@@ -31,5 +31,6 @@
   "affiliateUrl": "https://proton.me/fr/business/pass",
   "pricingScreenshotPath": "/proofs/proton-pass-business-pricing.webp",
   "lastVerifiedDate": "2026-10-24",
-  "hasActiveAffiliateLink": false
+  "hasActiveAffiliateLink": false,
+  "jurisdictionStatus": "ADEQUACY_RGPD_NON_EU"
 }

@@ -5,6 +5,7 @@ export interface ToolItem {
   category: string;
   vendorCountry: string;
   isEuropeanSovereign: boolean;
+  jurisdictionStatus: 'EU_MEMBER' | 'ADEQUACY_RGPD_NON_EU' | 'US_CLOUD_ACT';
   startingPriceMonthlyEur: number;
   pricingModel: 'PER_USER' | 'PER_ENDPOINT' | 'FLAT_RATE' | 'CUSTOM_QUOTE';
   minimumSeats: number;
@@ -74,7 +75,7 @@ const numberFormat = new Intl.NumberFormat('fr-FR', {
         </span>
       </div>
       <h2 class="text-base font-display font-bold tracking-tight text-zinc-950">
-        Calculateur de Coût Réel (TCO) et Exposition Juridictionnelle
+        Calculateur de Coût Indicatif (TCO) et Exposition Juridictionnelle
       </h2>
     </div>
 
@@ -84,7 +85,7 @@ const numberFormat = new Intl.NumberFormat('fr-FR', {
         class="w-3.5 h-3.5 accent-zinc-900 rounded cursor-pointer"
         data-sovereign-filter
       />
-      <span>Filtrer : Souverain UE / Exempt Cloud Act uniquement</span>
+      <span>Filtrer : Juridiction UE · Hors Cloud Act direct</span>
     </label>
   </div>
 
@@ -162,7 +163,7 @@ const numberFormat = new Intl.NumberFormat('fr-FR', {
           data-price={tool.startingPriceMonthlyEur}
           data-model={tool.pricingModel}
           data-min-seats={tool.minimumSeats}
-          data-sovereign={tool.isEuropeanSovereign ? 'true' : 'false'}
+          data-sovereign={tool.jurisdictionStatus === 'EU_MEMBER' ? 'true' : 'false'}
           data-current-monthly={Math.round(initialMonthly)}
           data-current-annual={Math.round(initialAnnual)}
         >
@@ -172,9 +173,9 @@ const numberFormat = new Intl.NumberFormat('fr-FR', {
                 <svg class="w-3.5 h-3.5 text-zinc-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                 </svg>
-                Option Recommandée Audit NIS2
+                Option Recommandée Analyse NIS2
               </span>
-              <span class="text-zinc-500">Vérifié le {tool.lastVerifiedDate}</span>
+              <span class="text-zinc-500">Relevé le {tool.lastVerifiedDate}</span>
             </div>
           )}
 
@@ -197,19 +198,28 @@ const numberFormat = new Intl.NumberFormat('fr-FR', {
                 </div>
               </div>
 
-              {tool.isEuropeanSovereign ? (
+              {tool.jurisdictionStatus === 'EU_MEMBER' && (
                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200">
                   <svg class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  Exempt Cloud Act · Souverain UE ({tool.vendorCountry})
+                  Juridiction UE · Hors Cloud Act direct
                 </span>
-              ) : (
+              )}
+              {tool.jurisdictionStatus === 'ADEQUACY_RGPD_NON_EU' && (
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-medium bg-zinc-100 text-zinc-800 border border-zinc-300">
+                  <svg class="w-3.5 h-3.5 text-zinc-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Hors UE · Adéquation RGPD ({tool.vendorCountry})
+                </span>
+              )}
+              {tool.jurisdictionStatus === 'US_CLOUD_ACT' && (
                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200">
                   <svg class="w-3.5 h-3.5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
                   </svg>
-                  Juridiction {tool.vendorCountry} · Soumis Cloud Act US
+                  Juridiction US · Soumis Cloud Act
                 </span>
               )}
             </div>
@@ -224,7 +234,7 @@ const numberFormat = new Intl.NumberFormat('fr-FR', {
                     Sur Devis Personnalisé
                   </p>
                   <p class="text-xs text-zinc-600 mt-1">
-                    Tarification calibrée selon le périmètre d'audit NIS2 et le nombre d'entités.
+                    Tarification calibrée selon le périmètre NIS2 et le nombre d'entités.
                   </p>
                 </div>
               ) : (
@@ -245,7 +255,7 @@ const numberFormat = new Intl.NumberFormat('fr-FR', {
                   </div>
                   <div class="border-l border-zinc-200 pl-4">
                     <p class="text-[11px] uppercase tracking-wider text-zinc-700 font-medium">
-                      TCO Annuel Estimé HT
+                      TCO Annuel Indicatif HT
                     </p>
                     <p class="text-2xl font-bold font-mono text-zinc-950 mt-0.5">
                       <span data-annual-cost>
@@ -268,7 +278,7 @@ const numberFormat = new Intl.NumberFormat('fr-FR', {
                 <div class="w-full h-1.5 bg-zinc-200 rounded overflow-hidden">
                   <div
                     class={`h-full rounded transition-all duration-300 ease-out ${
-                      tool.isEuropeanSovereign ? 'bg-emerald-600' : 'bg-zinc-900'
+                      tool.jurisdictionStatus === 'EU_MEMBER' ? 'bg-emerald-600' : 'bg-zinc-900'
                     }`}
                     style={`width: ${initialBarPct}%;`}
                     data-cost-bar
@@ -324,6 +334,10 @@ const numberFormat = new Intl.NumberFormat('fr-FR', {
         </div>
       );
     })}
+  </div>
+
+  <div class="px-6 py-3 bg-zinc-50 border-t border-zinc-200 text-[11px] text-zinc-500">
+    Estimations basées sur les tarifs publics éditeurs relevés à la date indiquée ; les tarifs finaux via intégrateurs (VAR/MSP) peuvent varier.
   </div>
 </section>
 

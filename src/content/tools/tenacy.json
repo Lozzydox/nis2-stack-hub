@@ -31,5 +31,6 @@
   "affiliateUrl": "https://www.tenacy.io/fr/",
   "pricingScreenshotPath": "/proofs/tenacy-pricing.webp",
   "lastVerifiedDate": "2026-10-24",
-  "hasActiveAffiliateLink": false
+  "hasActiveAffiliateLink": false,
+  "jurisdictionStatus": "EU_MEMBER"
 }

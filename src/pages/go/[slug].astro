@@ -12,16 +12,22 @@ export async function getStaticPaths() {
 
 const { tool } = Astro.props;
 
-const defaultWebhookUrl =
-  import.meta.env.PUBLIC_LEAD_WEBHOOK_URL ||
-  'https://discord.com/api/webhooks/1563575615163211947/mpNJSrQ9abu-3HvippJv6uuPsaRWNUuvXiugLnXBWUO-JiuzRzVVNhvkeDIbukHNwLGT';
-
 const isCustomQuote = tool.pricingModel === 'CUSTOM_QUOTE' || tool.startingPriceMonthlyEur === 0;
+
+function formatJurisdictionDetail(jStatus: string, country: string): string {
+  if (jStatus === 'EU_MEMBER') {
+    return `Juridiction UE (${country}) · Hors Cloud Act direct`;
+  }
+  if (jStatus === 'ADEQUACY_RGPD_NON_EU') {
+    return `Hors UE · Adéquation RGPD (${country})`;
+  }
+  return `Juridiction US (${country}) · Soumis Cloud Act`;
+}
 ---
 
 <BaseLayout
   title={`Obtention des Grilles Tarifaires & Chiffrage B2B — ${tool.name} | NIS2 // STACK HUB`}
-  description={`Cellule de courtage et d'homologation NIS2 (Article 21) pour ${tool.name}. Obtenez les grilles tarifaires vérifiées et la matrice PDF.`}
+  description={`Dossier d'évaluation NIS2 (Article 21) et chiffrage B2B pour ${tool.name}. Téléchargez la matrice PDF et consultez les relevés tarifaires.`}
 >
   {tool.hasActiveAffiliateLink && (
     <script is:inline define:vars={{ targetUrl: tool.affiliateUrl }}>
@@ -38,10 +44,10 @@ const isCustomQuote = tool.pricingModel === 'CUSTOM_QUOTE' || tool.startingPrice
       <div class="bg-white border border-zinc-200 rounded-md overflow-hidden shadow-[0_2px_12px_rgba(9,9,11,0.04)] animate-fade-up">
         <div class="bg-zinc-100/80 border-b border-zinc-200 px-6 py-3.5 flex flex-wrap items-center justify-between gap-2">
           <span class="font-mono text-[11px] font-semibold px-2 py-0.5 rounded bg-white text-zinc-800 border border-zinc-200">
-            CELLULE COURTAGE B2B // {tool.category}
+            CELLULE D'ÉVALUATION B2B // {tool.category}
           </span>
           <span class="text-xs text-zinc-500">
-            Vérifié le {tool.lastVerifiedDate}
+            Relevé le {tool.lastVerifiedDate}
           </span>
         </div>
 
@@ -59,14 +65,14 @@ const isCustomQuote = tool.pricingModel === 'CUSTOM_QUOTE' || tool.startingPrice
                 Obtention des Grilles Tarifaires & Chiffrage B2B — {tool.name}
               </h1>
               <p class="text-xs text-zinc-600 mt-1">
-                Juridiction : <strong>{tool.vendorCountry}</strong> ({tool.isEuropeanSovereign ? 'Exempt Cloud Act / Souverain UE' : 'Soumis Cloud Act US'}) · Seuil min. : <span class="font-mono">{tool.minimumSeats}</span> poste(s)
+                {formatJurisdictionDetail(tool.jurisdictionStatus, tool.vendorCountry)} · Seuil min. : <span class="font-mono">{tool.minimumSeats}</span> poste(s)
               </p>
             </div>
           </div>
 
           <div class="bg-zinc-50 border border-zinc-200 rounded p-4 mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
             <div>
-              <span class="text-zinc-500 block mb-0.5">Tarification de référence constatée :</span>
+              <span class="text-zinc-500 block mb-0.5">Relevé tarifaire public indicatif :</span>
               <strong class="font-mono text-sm text-zinc-950">
                 {isCustomQuote
                   ? 'Sur devis entreprise (PME / ETI)'
@@ -82,7 +88,7 @@ const isCustomQuote = tool.pricingModel === 'CUSTOM_QUOTE' || tool.startingPrice
           </div>
 
           <p class="text-sm text-zinc-600 leading-relaxed mb-6">
-            Indiquez votre adresse professionnelle et le volume de votre parc informatique pour recevoir immédiatement la <strong>Matrice d'Homologation Technique & Financière NIS2 (PDF)</strong> ainsi que les barèmes de remises volumétriques applicables à <strong>{tool.name}</strong>.
+            Indiquez votre adresse professionnelle et le volume de votre parc informatique pour télécharger immédiatement la <strong>Matrice d'Évaluation Technique & Financière NIS2 (PDF)</strong> incluant les barèmes comparatifs de <strong>{tool.name}</strong>.
           </p>
 
           <form
@@ -90,8 +96,18 @@ const isCustomQuote = tool.pricingModel === 'CUSTOM_QUOTE' || tool.startingPrice
             data-broker-lead-form
             data-tool={tool.name}
             data-silo={tool.category}
-            data-webhook-url={defaultWebhookUrl}
           >
+            <div class="hidden" aria-hidden="true">
+              <label for="broker-website-url">Website</label>
+              <input
+                id="broker-website-url"
+                name="website_url"
+                type="text"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
+
             <div>
               <label for="broker-email" class="block text-xs font-medium text-zinc-800 mb-1.5">
                 Email Professionnel (DSI / RSSI / Achats IT)
@@ -121,11 +137,36 @@ const isCustomQuote = tool.pricingModel === 'CUSTOM_QUOTE' || tool.startingPrice
               </select>
             </div>
 
+            <div class="space-y-2.5 pt-1">
+              <label class="flex items-start gap-2.5 text-xs text-zinc-700 cursor-pointer">
+                <input
+                  id="broker-consent-privacy"
+                  type="checkbox"
+                  required
+                  class="mt-0.5 w-3.5 h-3.5 accent-zinc-900 rounded shrink-0 cursor-pointer"
+                />
+                <span>
+                  J'accepte que mon adresse email soit traitée pour recevoir la matrice PDF conformément à la <a href="/confidentialite" class="underline font-medium text-zinc-900">Politique de Confidentialité</a>. *
+                </span>
+              </label>
+
+              <label class="flex items-start gap-2.5 text-xs text-zinc-600 cursor-pointer">
+                <input
+                  id="broker-consent-partner"
+                  type="checkbox"
+                  class="mt-0.5 w-3.5 h-3.5 accent-zinc-900 rounded shrink-0 cursor-pointer"
+                />
+                <span>
+                  Je souhaite être mis en relation avec un intégrateur ou éditeur partenaire pour obtenir un chiffrage personnalisé (optionnel).
+                </span>
+              </label>
+            </div>
+
             <button
               type="submit"
               class="w-full py-3 px-4 rounded bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-xs transition-colors cursor-pointer flex items-center justify-center gap-2"
             >
-              <span>Recevoir la Grille Tarifaire Vérifiée & Matrice PDF</span>
+              <span>Télécharger la Grille Indicative & Matrice PDF</span>
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
@@ -135,7 +176,7 @@ const isCustomQuote = tool.pricingModel === 'CUSTOM_QUOTE' || tool.startingPrice
               data-broker-msg
               class="hidden p-3 rounded bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 font-medium text-center"
             >
-              Votre demande de chiffrage est enregistrée et le téléchargement de la Matrice PDF NIS2 a démarré.
+              Votre demande est enregistrée et le téléchargement de la Matrice PDF NIS2 a démarré.
             </div>
           </form>
 
@@ -170,39 +211,29 @@ const isCustomQuote = tool.pricingModel === 'CUSTOM_QUOTE' || tool.startingPrice
           e.preventDefault();
           const emailInput = form.querySelector('#broker-email') as HTMLInputElement | null;
           const seatsInput = form.querySelector('#broker-seats') as HTMLSelectElement | null;
+          const honeypotInput = form.querySelector('#broker-website-url') as HTMLInputElement | null;
+          const privacyInput = form.querySelector('#broker-consent-privacy') as HTMLInputElement | null;
+          const partnerInput = form.querySelector('#broker-consent-partner') as HTMLInputElement | null;
           const msg = form.querySelector('[data-broker-msg]');
 
-          const email = emailInput ? emailInput.value.trim() : '';
-          const seats = seatsInput ? seatsInput.value : '25 à 50 postes';
-          const tool = form.dataset.tool || '';
-          const silo = form.dataset.silo || '';
-          const sourceUrl = window.location.href;
-
           const payload = {
-            email,
-            tool,
-            seats,
-            silo,
-            sourceUrl,
-            content: `[DEMANDE DEVIS B2B /GO/] Email: ${email} | Outil: ${tool} | Parc: ${seats} | Silo: ${silo} | Source: ${sourceUrl}`
+            email: emailInput ? emailInput.value.trim() : '',
+            tool: form.dataset.tool || '',
+            seats: seatsInput ? seatsInput.value : '25 à 50 postes',
+            silo: form.dataset.silo || '',
+            sourceUrl: window.location.href,
+            website_url: honeypotInput ? honeypotInput.value : '',
+            consentPrivacy: privacyInput ? privacyInput.checked : false,
+            consentPartnerShare: partnerInput ? partnerInput.checked : false
           };
 
           try {
-            const existing = JSON.parse(localStorage.getItem('nis2_b2b_leads') || '[]');
-            existing.push(payload);
-            localStorage.setItem('nis2_b2b_leads', JSON.stringify(existing));
+            await fetch('/api/lead', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
           } catch {}
-
-          const webhookUrl = form.dataset.webhookUrl || '';
-          if (webhookUrl) {
-            try {
-              await fetch(webhookUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-              });
-            } catch {}
-          }
 
           if (msg) {
             msg.classList.remove('hidden');
@@ -210,7 +241,7 @@ const isCustomQuote = tool.pricingModel === 'CUSTOM_QUOTE' || tool.startingPrice
 
           const link = document.createElement('a');
           link.href = '/matrice-homologation-nis2.pdf';
-          link.download = 'Matrice-Homologation-NIS2-Article21.pdf';
+          link.download = 'Matrice-Conformite-NIS2-Article21.pdf';
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);

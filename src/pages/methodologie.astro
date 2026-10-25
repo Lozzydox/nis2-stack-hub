@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Méthodologie d'Analyse, Taxonomie Juridictionnelle & Calcul TCO | NIS2 // STACK HUB"
+  description="Découvrez la méthodologie d'analyse technique Article 21 NIS2, les critères CCB CyberFundamentals / ANSSI et le protocole de calcul de TCO de NIS2 // STACK HUB."
+>
+  <div class="bg-white border-b border-zinc-200 py-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex items-center gap-2 text-xs text-zinc-500 mb-4">
+        <a href="/" class="hover:text-zinc-950 transition-colors">Accueil</a>
+        <span>/</span>
+        <span class="text-zinc-800">Méthodologie d'Analyse</span>
+      </nav>
+      <span class="px-2.5 py-0.5 rounded bg-zinc-100 text-zinc-800 border border-zinc-200 font-mono text-xs font-medium inline-block mb-3">
+        PROTOCOLE D'ÉVALUATION TECHNIQUE & BUDGÉTAIRE
+      </span>
+      <h1 class="text-2xl sm:text-4xl font-display font-bold tracking-tight text-zinc-950">
+        Méthodologie d'Analyse Réseau, Juridictionnelle et Calcul du TCO
+      </h1>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+    <section class="bg-white border border-zinc-200 rounded-md p-6 sm:p-8 space-y-4">
+      <h2 class="text-lg font-display font-bold text-zinc-950 border-b border-zinc-200 pb-3">
+        1. Genèse et Démarche du Projet
+      </h2>
+      <p class="text-sm text-zinc-700 leading-relaxed">
+        <strong>NIS2 // STACK HUB</strong> est né d'un constat opérationnel partagé par de nombreux responsables informatiques de PME et d'ETI en Belgique et en France : face à l'entrée en vigueur de la directive (UE) 2022/2555 (NIS2) et du référentiel <strong>CCB CyberFundamentals</strong>, l'opacité des grilles tarifaires des éditeurs cyber et la confusion autour de la souveraineté des données compliquent lourdement les arbitrages budgétaires.
+      </p>
+      <p class="text-sm text-zinc-700 leading-relaxed">
+        Conçu comme un projet indépendant d'analyse d'architecture réseau et de cybersécurité, cet observatoire structure les solutions du marché autour des <strong>6 silos techniques de l'Article 21</strong> (`SASE_VPN`, `IAM_PAM`, `EDR_XDR`, `VULN_PENTEST`, `BACKUP_DR`, `GRC_NIS2`) en croisant systématiquement trois axes : la capacité technique réelle, l'exposition juridique extraterritoriale et le coût total de possession (TCO) de 10 à 500 postes.
+      </p>
+    </section>
+
+    <section class="bg-white border border-zinc-200 rounded-md p-6 sm:p-8 space-y-4">
+      <h2 class="text-lg font-display font-bold text-zinc-950 border-b border-zinc-200 pb-3">
+        2. Taxonomie Juridictionnelle Stricte (UE vs Adéquation RGPD vs Cloud Act)
+      </h2>
+      <p class="text-sm text-zinc-700 leading-relaxed">
+        Contrairement aux comparatifs généralistes qui regroupent indistinctement les éditeurs européens et suisses, notre référentiel applique une classification juridique tripartite rigoureuse au regard de l'Article 21.2.d (sécurité de la chaîne d'approvisionnement) :
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+        <div class="bg-emerald-50/60 border border-emerald-200 rounded p-4">
+          <span class="font-mono text-xs font-bold text-emerald-900 block mb-1">1. EU_MEMBER</span>
+          <p class="text-xs font-display font-bold text-zinc-950 mb-1">Juridiction UE · Hors Cloud Act direct</p>
+          <p class="text-xs text-zinc-700 leading-relaxed">
+            Société mère établie dans un État membre de l'Union Européenne (France, Allemagne, Roumanie, Lituanie), soumise directement au droit de l'Union et aux autorités nationales NIS2 (ANSSI, BSI, CCB).
+          </p>
+        </div>
+        <div class="bg-zinc-50 border border-zinc-300 rounded p-4">
+          <span class="font-mono text-xs font-bold text-zinc-800 block mb-1">2. ADEQUACY_RGPD_NON_EU</span>
+          <p class="text-xs font-display font-bold text-zinc-950 mb-1">Hors UE · Adéquation RGPD (Suisse / UK)</p>
+          <p class="text-xs text-zinc-700 leading-relaxed">
+            Éditeur établi dans un pays tiers européen hors Union Européenne (Suisse, Royaume-Uni) bénéficiant d'une décision d'adéquation RGPD de la Commission européenne et non soumis au Cloud Act américain.
+          </p>
+        </div>
+        <div class="bg-amber-50/60 border border-amber-200 rounded p-4">
+          <span class="font-mono text-xs font-bold text-amber-900 block mb-1">3. US_CLOUD_ACT</span>
+          <p class="text-xs font-display font-bold text-zinc-950 mb-1">Juridiction US · Soumis Cloud Act</p>
+          <p class="text-xs text-zinc-700 leading-relaxed">
+            Éditeur dont le siège social ou la société mère relève de la juridiction américaine (CLOUD Act de 2018 / FISA 702), même lorsque l'hébergement physique des données est localisé en Europe (Francfort, Dublin ou Paris).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white border border-zinc-200 rounded-md p-6 sm:p-8 space-y-4">
+      <h2 class="text-lg font-display font-bold text-zinc-950 border-b border-zinc-200 pb-3">
+        3. Protocole de Calcul du TCO et Paliers Minimums
+      </h2>
+      <p class="text-sm text-zinc-700 leading-relaxed">
+        Pour éviter les mauvaises surprises lors des appels d'offres PME, notre moteur de simulation intègre la règle du seuil plancher (`minimumSeats`) :
+      </p>
+      <div class="bg-zinc-50 border border-zinc-200 rounded p-4 font-mono text-xs text-zinc-800">
+        Coût Annuel Indicatif HT = max(Postes_Sélectionnés, Seuil_Minimum_Éditeur) × Tarif_Mensuel_Unitaire × 12
+      </div>
+      <p class="text-xs text-zinc-600 leading-relaxed">
+        Chaque tarif unitaire est accompagné d'une capture d'écran horodatée (`public/proofs/[id]-pricing.webp`) issue des pages tarifaires publiques de l'éditeur ou des places de marché B2B de référence. Les coûts d'intégration initiale (onboarding MSSP, stockage cloud additionnel au téraoctet) sont systématiquement précisés dans le corps de chaque dossier comparatif.
+      </p>
+    </section>
+  </div>
+</BaseLayout>

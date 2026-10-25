@@ -4,7 +4,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://nis2-stack-hub.com',
+  site: 'https://nis2-stack-hub.pages.dev',
   vite: {
     plugins: [tailwindcss()]
   },

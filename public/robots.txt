@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /go/
 
-Sitemap: https://nis2-stack-hub.com/sitemap-index.xml
+Sitemap: https://nis2-stack-hub.pages.dev/sitemap-index.xml
